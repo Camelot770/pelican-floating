@@ -2234,7 +2234,7 @@
         }
 
         // ============== CONFIRMATIONS ==============
-        function confirmBooking() {
+        async function confirmBooking() {
             const btn = document.getElementById('mainBtn');
             btn.classList.add('loading');
             btn.disabled = true;
@@ -2255,21 +2255,53 @@
                 telegramUserId: currentUser.id
             };
 
-            // Отправляем в бота
-            if (tg?.sendData) {
-                tg.sendData(JSON.stringify(bookingData));
+            // Сохраняем через API
+            let apiSuccess = false;
+            if (API_URL) {
+                try {
+                    const response = await fetch(`${API_URL}/api/bookings`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(bookingData)
+                    });
+                    const result = await response.json();
+                    if (response.ok && result.success) {
+                        apiSuccess = true;
+                        bookingData.bookingId = result.booking_id;
+                    }
+                } catch (e) {
+                    console.error('API booking failed:', e);
+                }
             }
 
-            // Добавляем в локальный список
-            const newBookingId = 'PEL' + Date.now();
-            userBookings.unshift({
-                id: newBookingId,
-                service_name: service.name,
-                price: service.price,
-                date: selectedDate,
-                time: selectedTime,
-                status: 'confirmed'
-            });
+            // Отправляем в бота и закрываем Mini App
+            if (tg?.sendData) {
+                tg.sendData(JSON.stringify(bookingData));
+                // Показываем модалку и закрываем
+                btn.classList.remove('loading');
+                showSuccessModal('booking', bookingData);
+                updateProfileStats();
+                
+                // Закрываем Mini App через 2 секунды чтобы данные дошли до бота
+                setTimeout(() => {
+                    if (tg?.close) {
+                        tg.close();
+                    }
+                }, 2000);
+                return;
+            }
+
+            // Если нет Telegram - просто показываем успех
+            if (apiSuccess) {
+                userBookings.unshift({
+                    id: bookingData.bookingId || 'PEL' + Date.now(),
+                    service_name: service.name,
+                    price: service.price,
+                    date: selectedDate,
+                    time: selectedTime,
+                    status: 'confirmed'
+                });
+            }
 
             // Очищаем кэш слотов для этой даты
             delete slotsCache[selectedDate];
@@ -2327,6 +2359,17 @@
 
             if (tg?.sendData) {
                 tg.sendData(JSON.stringify(certData));
+                // Показываем модалку и закрываем
+                btn.classList.remove('loading');
+                showSuccessModal('certificate', certData);
+                
+                // Закрываем Mini App через 2 секунды
+                setTimeout(() => {
+                    if (tg?.close) {
+                        tg.close();
+                    }
+                }, 2000);
+                return;
             }
 
             setTimeout(() => {
@@ -2375,7 +2418,7 @@
             if (type === 'booking') {
                 icon.textContent = '✓';
                 title.textContent = 'Запись подтверждена!';
-                text.textContent = 'Мы ждём вас в студии. Приходите за 10-15 минут до начала.';
+                text.textContent = 'Мы ждём вас в студии. Подтверждение придёт в чат.';
                 details.innerHTML = `
                     <div class="modal-detail-row">
                         <span>Услуга</span><span>${data.serviceName}</span>
@@ -2393,8 +2436,8 @@
             } else {
                 icon.textContent = '🎁';
                 icon.classList.add('gold');
-                title.textContent = 'Сертификат оформлен!';
-                text.textContent = 'После оплаты сертификат будет отправлен на указанный email.';
+                title.textContent = 'Заявка принята!';
+                text.textContent = 'Свяжитесь с нами для оплаты. Сертификат придёт в чат.';
                 details.innerHTML = `
                     <div class="modal-detail-row">
                         <span>Сертификат</span><span>${data.certificateName}</span>
