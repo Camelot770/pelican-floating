@@ -2000,24 +2000,7 @@
 
             // Form listeners
             document.getElementById('certRecipient').addEventListener('input', updateCertSummary);
-            document.getElementById('certEmail').addEventListener('input', function() {
-                updateMainButton();
-                validateEmailFormat(this);
-            });
-            document.getElementById('certEmail').addEventListener('blur', function() {
-                validateEmailFormat(this);
-            });
-        }
-        
-        function validateEmailFormat(input) {
-            const email = input.value.trim();
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-            
-            if (email && !emailRegex.test(email)) {
-                input.style.borderColor = '#ff5252';
-            } else {
-                input.style.borderColor = '';
-            }
+            document.getElementById('certPhone').addEventListener('input', updateMainButton);
         }
 
         function updateCertSummary() {
@@ -2278,24 +2261,12 @@
                 }
             }
 
-            // Отправляем в бота и закрываем Mini App
+            // Также отправляем в бота если доступен
             if (tg?.sendData) {
                 tg.sendData(JSON.stringify(bookingData));
-                // Показываем модалку и закрываем
-                btn.classList.remove('loading');
-                showSuccessModal('booking', bookingData);
-                updateProfileStats();
-                
-                // Закрываем Mini App через 2 секунды чтобы данные дошли до бота
-                setTimeout(() => {
-                    if (tg?.close) {
-                        tg.close();
-                    }
-                }, 2000);
-                return;
             }
 
-            // Если нет Telegram - просто показываем успех
+            // Если API успешен - добавляем в локальный список
             if (apiSuccess) {
                 userBookings.unshift({
                     id: bookingData.bookingId || 'PEL' + Date.now(),
@@ -2310,11 +2281,9 @@
             // Очищаем кэш слотов для этой даты
             delete slotsCache[selectedDate];
 
-            setTimeout(() => {
-                btn.classList.remove('loading');
-                showSuccessModal('booking', bookingData);
-                updateProfileStats();
-            }, 800);
+            btn.classList.remove('loading');
+            showSuccessModal('booking', bookingData);
+            updateProfileStats();
         }
 
         async function confirmCertificate() {
@@ -2345,25 +2314,40 @@
                 telegramUserId: currentUser.id
             };
 
-            if (tg?.sendData) {
-                tg.sendData(JSON.stringify(certData));
-                // Показываем модалку и закрываем
-                btn.classList.remove('loading');
-                showSuccessModal('certificate', certData);
-                
-                // Закрываем Mini App через 2 секунды
-                setTimeout(() => {
-                    if (tg?.close) {
-                        tg.close();
+            // Сначала отправляем через API
+            let apiSuccess = false;
+            if (API_URL) {
+                try {
+                    const response = await fetch(`${API_URL}/api/certificates`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(certData)
+                    });
+                    const result = await response.json();
+                    if (response.ok && result.success) {
+                        apiSuccess = true;
+                        certData.certId = result.cert_id;
                     }
-                }, 2000);
-                return;
+                } catch (e) {
+                    console.error('API certificate failed:', e);
+                }
             }
 
+            // Также отправляем в бота если доступен
+            if (tg?.sendData) {
+                tg.sendData(JSON.stringify(certData));
+            }
+            
+            // Показываем модалку
+            btn.classList.remove('loading');
+            showSuccessModal('certificate', certData);
+            
+            // Закрываем Mini App через 2 секунды
             setTimeout(() => {
-                btn.classList.remove('loading');
-                showSuccessModal('certificate', certData);
-            }, 800);
+                if (tg?.close) {
+                    tg.close();
+                }
+            }, 2000);
         }
         
         // Показать toast уведомление
@@ -2472,7 +2456,8 @@
             document.getElementById('certSummary').style.display = 'none';
 
             document.getElementById('certRecipient').value = '';
-            document.getElementById('certEmail').value = '';
+            document.getElementById('certPhone').value = '';
+            document.getElementById('certTelegram').value = '';
             document.getElementById('certMessage').value = '';
 
             updateMainButton();
