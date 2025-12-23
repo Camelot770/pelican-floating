@@ -1604,20 +1604,27 @@
         }
 
         async function loadSlotsForDate(dateStr) {
+            console.log('📅 loadSlotsForDate:', dateStr);
+            
             // Check cache first
             if (slotsCache[dateStr]) {
+                console.log('📦 Using cached slots');
                 return slotsCache[dateStr];
             }
             
             // Try to load from API
+            console.log('🌐 Fetching from API:', `${API_URL}/api/slots/${dateStr}`);
             const data = await apiCall(`/api/slots/${dateStr}`);
+            console.log('📨 API response:', data);
             
             if (data && data.slots) {
+                console.log('✅ Got', data.slots.length, 'slots from API');
                 slotsCache[dateStr] = data.slots;
                 return data.slots;
             }
             
             // Fallback: generate local slots
+            console.log('⚠️ API failed, generating local slots');
             const slots = [];
             const now = new Date();
             const isToday = dateStr === now.toISOString().split('T')[0];
@@ -1892,6 +1899,7 @@
         }
 
         function selectDate(dateStr, item) {
+            console.log('📆 selectDate clicked:', dateStr);
             document.querySelectorAll('.date-item').forEach(d => d.classList.remove('selected'));
             item.classList.add('selected');
 
@@ -1908,6 +1916,7 @@
 
             updateMainButton();
             haptic('selection');
+            console.log('✅ selectDate completed');
         }
 
         // ============== TIME SLOTS ==============
