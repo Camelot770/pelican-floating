@@ -1353,7 +1353,7 @@
                 <!-- Certificate Form -->
                 <div class="card" id="certForm" style="display: none;">
                     <div class="card-header">
-                        <div class="card-icon" style="background: var(--gold-gradient);">📧</div>
+                        <div class="card-icon" style="background: var(--gold-gradient);">👤</div>
                         <div>
                             <div class="card-title">Данные получателя</div>
                         </div>
@@ -1364,8 +1364,12 @@
                         <input type="text" id="certRecipient" class="form-input" placeholder="Кому дарите?">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Email получателя</label>
-                        <input type="email" id="certEmail" class="form-input" placeholder="email@example.com">
+                        <label class="form-label">Телефон получателя</label>
+                        <input type="tel" id="certPhone" class="form-input" placeholder="+7 (___) ___-__-__">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Telegram получателя (если есть)</label>
+                        <input type="text" id="certTelegram" class="form-input" placeholder="@username">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Поздравление (необязательно)</label>
@@ -2209,8 +2213,8 @@
                     text.textContent = 'Выберите сертификат';
                 } else {
                     const recipient = document.getElementById('certRecipient').value.trim();
-                    const email = document.getElementById('certEmail').value.trim();
-                    if (recipient && email) {
+                    const phone = document.getElementById('certPhone').value.trim();
+                    if (recipient && phone) {
                         btn.disabled = false;
                         text.textContent = 'Купить • ' + certificates[selectedCert].price.toLocaleString() + ' ₽';
                     } else {
@@ -2315,30 +2319,13 @@
 
         async function confirmCertificate() {
             const btn = document.getElementById('mainBtn');
-            const emailInput = document.getElementById('certEmail');
-            const email = emailInput.value.trim();
+            const phoneInput = document.getElementById('certPhone');
+            const phone = phoneInput.value.trim();
             
-            // Проверка email через API
-            if (API_URL) {
-                btn.classList.add('loading');
-                btn.disabled = true;
-                
-                try {
-                    const response = await fetch(`${API_URL}/api/validate-email?email=${encodeURIComponent(email)}`);
-                    const result = await response.json();
-                    
-                    if (!result.valid) {
-                        btn.classList.remove('loading');
-                        btn.disabled = false;
-                        
-                        // Показываем ошибку
-                        emailInput.style.borderColor = '#ff5252';
-                        showToast(result.error || 'Неверный email', 'error');
-                        return;
-                    }
-                } catch (e) {
-                    console.log('Email validation failed, proceeding anyway');
-                }
+            // Проверка телефона
+            if (!phone || phone.length < 10) {
+                showToast('Введите телефон получателя', 'error');
+                return;
             }
             
             btn.classList.add('loading');
@@ -2351,7 +2338,8 @@
                 certificateName: cert.name,
                 price: cert.price,
                 recipientName: document.getElementById('certRecipient').value.trim(),
-                recipientEmail: email,
+                recipientPhone: phone,
+                recipientTelegram: document.getElementById('certTelegram').value.trim(),
                 message: document.getElementById('certMessage').value.trim(),
                 buyerPhone: currentUser.phone,
                 telegramUserId: currentUser.id
@@ -2437,7 +2425,7 @@
                 icon.textContent = '🎁';
                 icon.classList.add('gold');
                 title.textContent = 'Заявка принята!';
-                text.textContent = 'Свяжитесь с нами для оплаты. Сертификат придёт в чат.';
+                text.textContent = 'Свяжитесь с нами для оплаты. После оплаты вам придёт код сертификата.';
                 details.innerHTML = `
                     <div class="modal-detail-row">
                         <span>Сертификат</span><span>${data.certificateName}</span>
@@ -2446,8 +2434,11 @@
                         <span>Получатель</span><span>${data.recipientName}</span>
                     </div>
                     <div class="modal-detail-row">
-                        <span>Email</span><span>${data.recipientEmail}</span>
+                        <span>Телефон</span><span>${data.recipientPhone}</span>
                     </div>
+                    ${data.recipientTelegram ? `<div class="modal-detail-row">
+                        <span>Telegram</span><span>${data.recipientTelegram}</span>
+                    </div>` : ''}
                     <div class="modal-detail-row">
                         <span>К оплате</span><span style="color: var(--accent-gold)">${data.price.toLocaleString()} ₽</span>
                     </div>
