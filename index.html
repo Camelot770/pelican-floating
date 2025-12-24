@@ -1560,6 +1560,12 @@
         // Slots data from API
         let slotsCache = {};
 
+        // Хелпер для парсинга даты без проблем с часовым поясом
+        function parseLocalDate(dateStr) {
+            const [year, month, day] = dateStr.split('-').map(Number);
+            return new Date(year, month - 1, day);
+        }
+
         // Mock data (в реале из API)
         const services = {
             'float-60': { name: 'Флоатинг 60 мин', price: 2500, duration: 60 },
@@ -1876,13 +1882,18 @@
         // ============== DATES ==============
         function generateDates() {
             const picker = document.getElementById('datePicker');
-            const days = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
+            const days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
             const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
 
             for (let i = 0; i < 14; i++) {
                 const date = new Date();
                 date.setDate(date.getDate() + i);
-                const dateStr = date.toISOString().split('T')[0];
+                
+                // Используем локальную дату, а не UTC!
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                const dateStr = `${year}-${month}-${day}`;
 
                 const item = document.createElement('div');
                 item.className = 'date-item';
@@ -1906,7 +1917,7 @@
             selectedDate = dateStr;
             selectedTime = null;
 
-            const date = new Date(dateStr);
+            const date = parseLocalDate(dateStr);
             document.getElementById('selectedDateText').textContent = 
                 date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'long' });
 
@@ -1982,7 +1993,7 @@
                 summary.style.display = 'block';
 
                 const service = services[selectedService];
-                const date = new Date(selectedDate);
+                const date = parseLocalDate(selectedDate);
                 const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short' });
 
                 document.getElementById('sumService').textContent = service.name;
@@ -2067,12 +2078,12 @@
 
             if (bookingsFilter === 'upcoming') {
                 filtered = userBookings.filter(b => {
-                    const bookingDate = new Date(b.date);
+                    const bookingDate = parseLocalDate(b.date);
                     return bookingDate >= now && b.status === 'confirmed';
                 });
             } else {
                 filtered = userBookings.filter(b => {
-                    const bookingDate = new Date(b.date);
+                    const bookingDate = parseLocalDate(b.date);
                     return bookingDate < now || b.status !== 'confirmed';
                 });
             }
@@ -2085,7 +2096,7 @@
 
             empty.style.display = 'none';
             container.innerHTML = filtered.map(b => {
-                const date = new Date(b.date);
+                const date = parseLocalDate(b.date);
                 const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short' });
                 const isPast = date < now || b.status !== 'confirmed';
                 const serviceName = b.service_name || b.service || 'Услуга';
@@ -2133,7 +2144,7 @@
             const booking = userBookings.find(b => b.id === bookingId);
             
             if (booking) {
-                const date = new Date(booking.date);
+                const date = parseLocalDate(booking.date);
                 const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
                 document.getElementById('cancelModalText').textContent = 
                     `${booking.service}, ${dateStr} в ${booking.time}`;
@@ -2236,7 +2247,7 @@
             btn.disabled = true;
 
             const service = services[selectedService];
-            const date = new Date(selectedDate);
+            const date = parseLocalDate(selectedDate);
 
             const bookingData = {
                 action: 'booking',
