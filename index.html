@@ -2269,7 +2269,8 @@
             console.log('⚠️ API failed, generating local slots');
             const slots = [];
             const now = new Date();
-            const isToday = dateStr === now.toISOString().split('T')[0];
+            const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+            const isToday = dateStr === todayStr;
             
             for (let hour = WORKING_HOURS.start; hour < WORKING_HOURS.end; hour++) {
                 for (let min of [0, 30]) {
@@ -2303,13 +2304,14 @@
                 const now = new Date();
                 const tomorrow = new Date(now);
                 tomorrow.setDate(tomorrow.getDate() + 1);
+                const tomorrowStr = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
                 
                 userBookings = [
                     {
                         id: 'PEL20240115120000',
                         service_name: 'Флоатинг 90 минут',
                         price: 3200,
-                        date: tomorrow.toISOString().split('T')[0],
+                        date: tomorrowStr,
                         time: '14:00',
                         status: 'confirmed'
                     }
