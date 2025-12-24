@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Пеликан - Флоатинг Студия</title>
+    <title>Pelican - Флоат студия в Казани</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -341,11 +341,48 @@
             color: var(--text-secondary);
         }
 
+        /* Category Tabs */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding: 8px 0 16px 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            margin-bottom: 8px;
+        }
+
+        .category-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-tab {
+            flex-shrink: 0;
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .category-tab.active {
+            background: var(--accent-gradient);
+            border-color: transparent;
+            color: white;
+        }
+
         /* Service Cards */
         .services-grid {
             display: flex;
             flex-direction: column;
             gap: 12px;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .service-card {
@@ -392,6 +429,8 @@
         .service-name {
             font-size: 15px;
             font-weight: 600;
+            flex: 1;
+            padding-right: 12px;
         }
 
         .service-duration {
@@ -404,12 +443,150 @@
             font-size: 18px;
             font-weight: 700;
             color: var(--accent-cyan);
+            white-space: nowrap;
+        }
+
+        .service-price.has-variants {
+            font-size: 14px;
+            color: var(--text-secondary);
         }
 
         .service-desc {
             font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .service-variants-hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 8px;
+            padding: 4px 10px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 12px;
+            font-size: 11px;
+            color: var(--accent-blue);
+        }
+
+        /* Variant Selection Modal */
+        .variant-modal {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-radius: 24px 24px 0 0;
+            padding: 24px 20px;
+            z-index: 1000;
+            animation: slideUp 0.3s ease;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .variant-modal.show {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .variant-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+        }
+
+        .variant-modal-overlay.show {
+            display: block;
+        }
+
+        .variant-modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .variant-modal-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .variant-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .variant-option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .variant-option:hover,
+        .variant-option.selected {
+            background: var(--bg-card-hover);
+            border-color: var(--accent-blue);
+        }
+
+        .variant-option.selected {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .variant-label {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .variant-price {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .variant-confirm-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        .empty-category {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-secondary);
+        }
+
+        .empty-category-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
         }
 
         /* Date Picker */
@@ -1173,8 +1350,8 @@
     <!-- Auth Screen -->
     <div class="auth-screen" id="authScreen">
         <div class="auth-logo">🦩</div>
-        <h1 class="auth-title">Пеликан</h1>
-        <p class="auth-subtitle">Войдите, чтобы записаться на флоатинг и управлять своими записями</p>
+        <h1 class="auth-title">Pelican</h1>
+        <p class="auth-subtitle">Флоат студия в центре Казани. Войдите, чтобы записаться и управлять своими записями</p>
         
         <button class="auth-btn" onclick="requestContact()">
             <span>📱</span>
@@ -1233,38 +1410,20 @@
             <!-- Booking Section -->
             <section id="booking" class="section active">
                 <div class="section-title">Выберите услугу</div>
+                
+                <!-- Category Tabs -->
+                <div class="category-tabs" id="categoryTabs">
+                    <div class="category-tab active" data-category="all">Все</div>
+                    <div class="category-tab" data-category="floating">Флоатинг</div>
+                    <div class="category-tab" data-category="couples">Для двоих</div>
+                    <div class="category-tab" data-category="massage">Массаж</div>
+                    <div class="category-tab" data-category="spa">SPA-ритуалы</div>
+                </div>
+                
                 <div class="services-grid" id="servicesList">
-                    <div class="service-card" data-service="float-60" data-price="2500" data-duration="60">
-                        <div class="service-top">
-                            <div>
-                                <div class="service-name">Флоатинг 60 минут</div>
-                                <div class="service-duration">⏱ 60 мин • Первое знакомство</div>
-                            </div>
-                            <div class="service-price">2 500 ₽</div>
-                        </div>
-                        <div class="service-desc">Идеально для первого погружения в мир невесомости</div>
-                    </div>
-
-                    <div class="service-card" data-service="float-90" data-price="3200" data-duration="90">
-                        <div class="service-top">
-                            <div>
-                                <div class="service-name">Флоатинг 90 минут</div>
-                                <div class="service-duration">⏱ 90 мин • Оптимальный</div>
-                            </div>
-                            <div class="service-price">3 200 ₽</div>
-                        </div>
-                        <div class="service-desc">Полное расслабление тела и разгрузка сознания</div>
-                    </div>
-
-                    <div class="service-card" data-service="float-120" data-price="3800" data-duration="120">
-                        <div class="service-top">
-                            <div>
-                                <div class="service-name">Флоатинг 120 минут</div>
-                                <div class="service-duration">⏱ 120 мин • Глубокий</div>
-                            </div>
-                            <div class="service-price">3 800 ₽</div>
-                        </div>
-                        <div class="service-desc">Максимальный терапевтический эффект</div>
+                    <div class="empty-category">
+                        <div class="empty-category-icon">⏳</div>
+                        <div>Загрузка услуг...</div>
                     </div>
                 </div>
 
@@ -1435,23 +1594,32 @@
                     <div class="card-header">
                         <div class="card-icon">🦩</div>
                         <div>
-                            <div class="card-title">О студии Пеликан</div>
-                            <div class="card-subtitle">Флоатинг в Казани</div>
+                            <div class="card-title">Флоат студия Pelican</div>
+                            <div class="card-subtitle">Место живительной силы в центре Казани</div>
                         </div>
                     </div>
                     <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
-                        Погрузитесь в мир абсолютной невесомости. Наши капсулы наполнены раствором английской соли, 
-                        который поддерживает тело на поверхности воды, создавая эффект парения в космосе.
+                        Новый способ психоэмоционального и физического расслабления в капсуле сенсорной депривации Dreampod. 
+                        Оздоровительные процедуры на системе сухого флоатинга Nuvola.
                     </p>
                 </div>
 
                 <div class="section-title">Контакты</div>
 
-                <div class="info-card" onclick="makeCall()">
+                <div class="info-card" onclick="makeCall1()">
                     <div class="info-icon">📞</div>
                     <div class="info-content">
                         <div class="info-title">Позвонить</div>
-                        <div class="info-subtitle">+7 (999) 123-45-67</div>
+                        <div class="info-subtitle">+7 960 089-51-73</div>
+                    </div>
+                    <span class="info-arrow">›</span>
+                </div>
+
+                <div class="info-card" onclick="makeCall2()">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-title">Позвонить</div>
+                        <div class="info-subtitle">+7 917 268-33-83</div>
                     </div>
                     <span class="info-arrow">›</span>
                 </div>
@@ -1469,7 +1637,7 @@
                     <div class="info-icon">📍</div>
                     <div class="info-content">
                         <div class="info-title">Адрес</div>
-                        <div class="info-subtitle">ул. Примерная, д. 1</div>
+                        <div class="info-subtitle">Казань, Большая красная ул., 8</div>
                     </div>
                     <span class="info-arrow">›</span>
                 </div>
@@ -1533,6 +1701,15 @@
         </div>
     </div>
 
+    <!-- Variant Selection Modal -->
+    <div class="variant-modal-overlay" id="variantOverlay"></div>
+    <div class="variant-modal" id="variantModal">
+        <div class="variant-modal-title" id="variantModalTitle">Выберите вариант</div>
+        <div class="variant-modal-desc" id="variantModalDesc"></div>
+        <div class="variant-options" id="variantOptions"></div>
+        <button class="variant-confirm-btn" id="variantConfirmBtn">Выбрать</button>
+    </div>
+
     <!-- Toast -->
     <div class="toast" id="toast"></div>
 
@@ -1551,11 +1728,17 @@
 
         // Booking state
         let selectedService = null;
+        let selectedServiceData = null;
+        let selectedVariant = null;
         let selectedDate = null;
         let selectedTime = null;
 
         // Certificate state
         let selectedCert = null;
+
+        // Services from API
+        let allServices = [];
+        let currentCategory = 'all';
 
         // Slots data from API
         let slotsCache = {};
@@ -1566,12 +1749,28 @@
             return new Date(year, month - 1, day);
         }
 
-        // Mock data (в реале из API)
-        const services = {
-            'float-60': { name: 'Флоатинг 60 мин', price: 2500, duration: 60 },
-            'float-90': { name: 'Флоатинг 90 мин', price: 3200, duration: 90 },
-            'float-120': { name: 'Флоатинг 120 мин', price: 3800, duration: 120 }
+        // Форматирование длительности
+        function formatDuration(minutes) {
+            if (minutes < 60) return `${minutes} мин`;
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            if (mins === 0) return `${hours} ч`;
+            return `${hours} ч ${mins} мин`;
+        }
+
+        // Категории
+        const categoryNames = {
+            'all': 'Все',
+            'floating': 'Флоатинг',
+            'couples': 'Для двоих',
+            'massage': 'Массаж',
+            'spa': 'SPA-ритуалы'
         };
+
+        // Fallback services (если API недоступен)
+        const fallbackServices = [
+            { code: 'float-capsule', name: 'Флоатинг в капсуле DREAMPOD', price: 2900, duration: 45, category: 'floating', has_variants: 1, variants: [{duration: 45, price: 2900, label: '45 минут'}, {duration: 60, price: 3500, label: '60 минут'}, {duration: 90, price: 4800, label: '90 минут'}], description: 'Самый эффективный метод глубочайшего расслабления и восстановления.' }
+        ];
 
         const certificates = {
             'cert-60': { name: 'Сертификат 60 мин', price: 2500 },
@@ -1708,7 +1907,7 @@
 
             // Init event listeners
             initNavigation();
-            initServiceCards();
+            initCategoryTabs();  // Инициализируем табы категорий
             initCertificateCards();
             initBookingsTabs();
             generateDates();
@@ -1775,6 +1974,7 @@
             document.getElementById('mainApp').style.display = 'block';
             updateProfile();
             loadUserBookings();
+            loadServices();  // Загружаем услуги из API
         }
 
         function requestContact() {
@@ -1857,26 +2057,193 @@
         }
 
         // ============== SERVICES ==============
-        function initServiceCards() {
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
+        // ============== SERVICES LOADING ==============
+        async function loadServices() {
+            try {
+                const data = await apiCall('/api/services');
+                if (data && data.services) {
+                    allServices = data.services;
+                    console.log('✅ Services loaded:', allServices.length);
+                } else {
+                    allServices = fallbackServices;
+                }
+            } catch (error) {
+                console.error('Failed to load services:', error);
+                allServices = fallbackServices;
+            }
+            renderServices();
+        }
 
-                    selectedService = card.dataset.service;
-                    selectedDate = null;
-                    selectedTime = null;
+        function renderServices() {
+            const container = document.getElementById('servicesList');
+            
+            // Фильтруем по категории
+            let filtered = allServices;
+            if (currentCategory !== 'all') {
+                filtered = allServices.filter(s => s.category === currentCategory);
+            }
+            
+            if (filtered.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-category">
+                        <div class="empty-category-icon">🚧</div>
+                        <div>Услуги в этой категории скоро появятся</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            container.innerHTML = filtered.map(service => {
+                const hasVariants = service.has_variants && service.variants && service.variants.length > 0;
+                const priceText = hasVariants 
+                    ? `от ${service.variants[0].price.toLocaleString()} ₽`
+                    : `${service.price.toLocaleString()} ₽`;
+                const priceClass = hasVariants ? 'has-variants' : '';
+                
+                return `
+                    <div class="service-card" 
+                         data-service="${service.code}" 
+                         data-price="${service.price}" 
+                         data-duration="${service.duration}"
+                         data-has-variants="${hasVariants ? '1' : '0'}">
+                        <div class="service-top">
+                            <div>
+                                <div class="service-name">${service.name}</div>
+                                <div class="service-duration">⏱ ${formatDuration(service.duration)}</div>
+                            </div>
+                            <div class="service-price ${priceClass}">${priceText}</div>
+                        </div>
+                        <div class="service-desc">${service.description || ''}</div>
+                        ${hasVariants ? '<div class="service-variants-hint">📋 Выбрать вариант</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+            
+            initServiceCards();
+        }
 
-                    document.getElementById('dateCard').style.display = 'block';
-                    document.getElementById('timeCard').style.display = 'none';
-                    document.getElementById('bookingSummary').style.display = 'none';
-
-                    document.querySelectorAll('.date-item').forEach(d => d.classList.remove('selected'));
-
-                    updateMainButton();
+        function initCategoryTabs() {
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentCategory = tab.dataset.category;
+                    renderServices();
                     haptic('light');
                 });
             });
+        }
+
+        function initServiceCards() {
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const serviceCode = card.dataset.service;
+                    const hasVariants = card.dataset.hasVariants === '1';
+                    
+                    // Находим данные услуги
+                    selectedServiceData = allServices.find(s => s.code === serviceCode);
+                    
+                    if (hasVariants && selectedServiceData.variants) {
+                        // Открываем модальное окно выбора варианта
+                        showVariantModal(selectedServiceData);
+                    } else {
+                        // Выбираем услугу напрямую
+                        selectService(serviceCode, selectedServiceData.price, selectedServiceData.duration);
+                        document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
+                        card.classList.add('selected');
+                    }
+                    
+                    haptic('light');
+                });
+            });
+        }
+
+        function showVariantModal(service) {
+            const modal = document.getElementById('variantModal');
+            const overlay = document.getElementById('variantOverlay');
+            const title = document.getElementById('variantModalTitle');
+            const desc = document.getElementById('variantModalDesc');
+            const options = document.getElementById('variantOptions');
+            
+            title.textContent = service.name;
+            desc.textContent = service.description || '';
+            
+            selectedVariant = null;
+            
+            options.innerHTML = service.variants.map((v, idx) => `
+                <div class="variant-option" data-index="${idx}" data-duration="${v.duration}" data-price="${v.price}">
+                    <div class="variant-label">${v.label}</div>
+                    <div class="variant-price">${v.price.toLocaleString()} ₽</div>
+                </div>
+            `).join('');
+            
+            // Обработчики для опций
+            options.querySelectorAll('.variant-option').forEach(opt => {
+                opt.addEventListener('click', () => {
+                    options.querySelectorAll('.variant-option').forEach(o => o.classList.remove('selected'));
+                    opt.classList.add('selected');
+                    selectedVariant = {
+                        index: parseInt(opt.dataset.index),
+                        duration: parseInt(opt.dataset.duration),
+                        price: parseInt(opt.dataset.price)
+                    };
+                    haptic('selection');
+                });
+            });
+            
+            modal.classList.add('show');
+            overlay.classList.add('show');
+            
+            // Закрытие по overlay
+            overlay.onclick = () => closeVariantModal();
+        }
+
+        function closeVariantModal() {
+            document.getElementById('variantModal').classList.remove('show');
+            document.getElementById('variantOverlay').classList.remove('show');
+        }
+
+        // Обработчик подтверждения выбора варианта
+        document.getElementById('variantConfirmBtn').addEventListener('click', () => {
+            if (!selectedVariant || !selectedServiceData) {
+                showToast('Выберите вариант');
+                return;
+            }
+            
+            selectService(
+                selectedServiceData.code, 
+                selectedVariant.price, 
+                selectedVariant.duration
+            );
+            
+            closeVariantModal();
+            
+            // Выделяем карточку
+            document.querySelectorAll('.service-card').forEach(c => {
+                if (c.dataset.service === selectedServiceData.code) {
+                    c.classList.add('selected');
+                } else {
+                    c.classList.remove('selected');
+                }
+            });
+        });
+
+        function selectService(code, price, duration) {
+            selectedService = code;
+            selectedServiceData = allServices.find(s => s.code === code) || { name: code, price, duration };
+            selectedServiceData.selectedPrice = price;
+            selectedServiceData.selectedDuration = duration;
+            
+            selectedDate = null;
+            selectedTime = null;
+
+            document.getElementById('dateCard').style.display = 'block';
+            document.getElementById('timeCard').style.display = 'none';
+            document.getElementById('bookingSummary').style.display = 'none';
+
+            document.querySelectorAll('.date-item').forEach(d => d.classList.remove('selected'));
+
+            updateMainButton();
         }
 
         // ============== DATES ==============
@@ -1943,16 +2310,36 @@
             // Load slots from API or cache
             const slots = await loadSlotsForDate(dateStr);
             
+            // Получаем длительность выбранной услуги
+            const duration = selectedServiceData?.selectedDuration || selectedServiceData?.duration || 60;
+            const slotsNeeded = Math.ceil(duration / 30);
+            
             grid.innerHTML = '';
             
             let hasAvailable = false;
             
-            for (const slot of slots) {
+            for (let i = 0; i < slots.length; i++) {
+                const slot = slots[i];
                 const el = document.createElement('div');
                 el.className = 'time-slot';
                 el.textContent = slot.time;
                 
-                if (slot.status === 'available') {
+                // Проверяем доступность всех необходимых слотов
+                let canBook = true;
+                if (slot.status !== 'available') {
+                    canBook = false;
+                } else if (slotsNeeded > 1) {
+                    // Проверяем следующие слоты
+                    for (let j = 1; j < slotsNeeded; j++) {
+                        const nextSlot = slots[i + j];
+                        if (!nextSlot || nextSlot.status !== 'available') {
+                            canBook = false;
+                            break;
+                        }
+                    }
+                }
+                
+                if (canBook) {
                     hasAvailable = true;
                     el.addEventListener('click', () => selectTime(slot.time, el));
                 } else {
@@ -1961,6 +2348,8 @@
                         el.title = 'Заблокировано';
                     } else if (slot.status === 'booked') {
                         el.title = 'Занято';
+                    } else if (slotsNeeded > 1) {
+                        el.title = `Недостаточно времени (нужно ${slotsNeeded} слотов)`;
                     }
                 }
                 
@@ -1989,17 +2378,20 @@
         function updateBookingSummary() {
             const summary = document.getElementById('bookingSummary');
 
-            if (selectedService && selectedDate && selectedTime) {
+            if (selectedService && selectedDate && selectedTime && selectedServiceData) {
                 summary.style.display = 'block';
 
-                const service = services[selectedService];
+                const serviceName = selectedServiceData.name;
+                const price = selectedServiceData.selectedPrice || selectedServiceData.price;
+                const duration = selectedServiceData.selectedDuration || selectedServiceData.duration;
+                
                 const date = parseLocalDate(selectedDate);
                 const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short' });
 
-                document.getElementById('sumService').textContent = service.name;
+                document.getElementById('sumService').textContent = `${serviceName} (${formatDuration(duration)})`;
                 document.getElementById('sumDate').textContent = dateStr;
                 document.getElementById('sumTime').textContent = selectedTime;
-                document.getElementById('sumTotal').textContent = service.price.toLocaleString() + ' ₽';
+                document.getElementById('sumTotal').textContent = price.toLocaleString() + ' ₽';
             }
         }
 
@@ -2075,16 +2467,26 @@
 
             const now = new Date();
             let filtered = [];
+            
+            // Вспомогательная функция для получения полной даты+время записи
+            function getBookingDateTime(b) {
+                const date = parseLocalDate(b.date);
+                const [hours, minutes] = (b.time || '00:00').split(':').map(Number);
+                date.setHours(hours, minutes, 0, 0);
+                return date;
+            }
 
             if (bookingsFilter === 'upcoming') {
+                // Предстоящие: дата+время >= сейчас И статус подтверждён
                 filtered = userBookings.filter(b => {
-                    const bookingDate = parseLocalDate(b.date);
-                    return bookingDate >= now && b.status === 'confirmed';
+                    const bookingDateTime = getBookingDateTime(b);
+                    return bookingDateTime >= now && b.status === 'confirmed';
                 });
             } else {
+                // История: дата+время < сейчас ИЛИ статус не подтверждён (отменено и т.д.)
                 filtered = userBookings.filter(b => {
-                    const bookingDate = parseLocalDate(b.date);
-                    return bookingDate < now || b.status !== 'confirmed';
+                    const bookingDateTime = getBookingDateTime(b);
+                    return bookingDateTime < now || b.status !== 'confirmed';
                 });
             }
 
@@ -2098,7 +2500,12 @@
             container.innerHTML = filtered.map(b => {
                 const date = parseLocalDate(b.date);
                 const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short' });
-                const isPast = date < now || b.status !== 'confirmed';
+                
+                // Используем функцию для получения полной даты+время
+                const bookingDateTime = getBookingDateTime(b);
+                
+                // Запись прошла только если дата+время записи меньше текущего времени
+                const isPast = bookingDateTime < now || b.status !== 'confirmed';
                 const serviceName = b.service_name || b.service || 'Услуга';
 
                 let statusClass = 'confirmed';
@@ -2246,14 +2653,17 @@
             btn.classList.add('loading');
             btn.disabled = true;
 
-            const service = services[selectedService];
+            const serviceName = selectedServiceData.name;
+            const price = selectedServiceData.selectedPrice || selectedServiceData.price;
+            const duration = selectedServiceData.selectedDuration || selectedServiceData.duration;
             const date = parseLocalDate(selectedDate);
 
             const bookingData = {
                 action: 'booking',
                 service: selectedService,
-                serviceName: service.name,
-                price: service.price,
+                serviceName: serviceName + ` (${formatDuration(duration)})`,
+                price: price,
+                duration: duration,
                 date: selectedDate,
                 dateFormatted: date.toLocaleDateString('ru-RU'),
                 time: selectedTime,
@@ -2290,8 +2700,8 @@
             if (apiSuccess) {
                 userBookings.unshift({
                     id: bookingData.bookingId || 'PEL' + Date.now(),
-                    service_name: service.name,
-                    price: service.price,
+                    service_name: serviceName,
+                    price: price,
                     date: selectedDate,
                     time: selectedTime,
                     status: 'confirmed'
@@ -2502,9 +2912,10 @@
         }
 
         // Contact functions
-        function makeCall() { window.open('tel:+79991234567'); }
+        function makeCall1() { window.open('tel:+79600895173'); }
+        function makeCall2() { window.open('tel:+79172683383'); }
         function openTelegram() { window.open('https://t.me/pelican_float'); }
-        function openMaps() { window.open('https://maps.google.com/?q=Флоатинг+студия+Пеликан'); }
+        function openMaps() { window.open('https://maps.google.com/?q=Казань,+Большая+красная+улица,+8'); }
     </script>
 </body>
 </html>
