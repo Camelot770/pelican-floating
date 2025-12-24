@@ -1697,10 +1697,6 @@
                 <span class="nav-icon">💧</span>
                 <span>Запись</span>
             </div>
-            <div class="nav-item" data-tab="promos">
-                <span class="nav-icon">🔥</span>
-                <span>Акции</span>
-            </div>
             <div class="nav-item" data-tab="certificates">
                 <span class="nav-icon">🎁</span>
                 <span>Сертификаты</span>
@@ -1787,54 +1783,6 @@
             </section>
 
             <!-- Certificates Section -->
-            <!-- Promos Section -->
-            <section id="promos" class="section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: linear-gradient(135deg, #f97316, #ef4444);">🔥</div>
-                        <div>
-                            <div class="card-title">Акции и новости</div>
-                            <div class="card-subtitle">Специальные предложения</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="promosList">
-                    <div class="promo-card">
-                        <div class="promo-badge">🎉 Акция</div>
-                        <div class="promo-title">Первый флоат со скидкой 20%</div>
-                        <div class="promo-desc">Для новых клиентов — скидка на первый сеанс флоатинга в капсуле Dreampod</div>
-                        <div class="promo-footer">
-                            <span class="promo-valid">до 31 января</span>
-                        </div>
-                    </div>
-
-                    <div class="promo-card">
-                        <div class="promo-badge" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">💝 Для пар</div>
-                        <div class="promo-title">Романтический флоат для двоих</div>
-                        <div class="promo-desc">Приходите вдвоём и получите скидку 15% на парные процедуры</div>
-                        <div class="promo-footer">
-                            <span class="promo-valid">постоянно</span>
-                        </div>
-                    </div>
-
-                    <div class="promo-card">
-                        <div class="promo-badge" style="background: linear-gradient(135deg, #10b981, #059669);">🌟 Новинка</div>
-                        <div class="promo-title">Сухой флоатинг Nuvola</div>
-                        <div class="promo-desc">Попробуйте новую систему сухого флоатинга — расслабление без воды</div>
-                        <div class="promo-footer">
-                            <span class="promo-valid">доступно</span>
-                        </div>
-                    </div>
-
-                    <div class="promo-card promo-info">
-                        <div class="promo-badge" style="background: linear-gradient(135deg, #3b82f6, #06b6d4);">ℹ️ Инфо</div>
-                        <div class="promo-title">Как подготовиться к флоатингу</div>
-                        <div class="promo-desc">• Не брейтесь за 12 часов до сеанса<br>• Снимите контактные линзы<br>• Не пейте кофе за 2 часа<br>• Поешьте за 1-2 часа до визита</div>
-                    </div>
-                </div>
-            </section>
-
             <section id="certificates" class="section">
                 <div class="card">
                     <div class="card-header">
@@ -2061,12 +2009,6 @@
                         <div class="info-subtitle">Казань, Большая красная ул., 8</div>
                     </div>
                     <span class="info-arrow">›</span>
-                </div>
-
-                <!-- Акции и новости -->
-                <div id="promotionsSection" style="display: none;">
-                    <div class="section-title" style="margin-top: 24px;">🔥 Акции и новости</div>
-                    <div id="promotionsList" class="promotions-list"></div>
                 </div>
 
                 <div class="section-title" style="margin-top: 24px;">Польза флоатинга</div>
@@ -2417,7 +2359,6 @@
             updateProfile();
             loadUserBookings();
             loadServices();  // Загружаем услуги из API
-            loadPromotions();  // Загружаем акции
         }
 
         function requestContact() {
@@ -2515,37 +2456,6 @@
                 allServices = fallbackServices;
             }
             renderServices();
-        }
-
-        async function loadPromotions() {
-            try {
-                const data = await apiCall('/api/promotions');
-                if (data && data.promotions && data.promotions.length > 0) {
-                    const container = document.getElementById('promotionsList');
-                    const section = document.getElementById('promotionsSection');
-                    
-                    container.innerHTML = data.promotions.map(p => {
-                        const isPromo = p.promo_type === 'promo';
-                        const icon = isPromo ? '🔥' : '📰';
-                        const cardClass = isPromo ? 'promo-card' : 'promo-card news';
-                        
-                        return `
-                            <div class="${cardClass}">
-                                <div class="promo-header">
-                                    <span class="promo-icon">${icon}</span>
-                                    <span class="promo-title">${p.title}</span>
-                                </div>
-                                ${p.description ? `<div class="promo-desc">${p.description}</div>` : ''}
-                            </div>
-                        `;
-                    }).join('');
-                    
-                    section.style.display = 'block';
-                    console.log('✅ Promotions loaded:', data.promotions.length);
-                }
-            } catch (error) {
-                console.error('Failed to load promotions:', error);
-            }
         }
 
         function renderServices() {
@@ -3242,9 +3152,6 @@
                         text.textContent = 'Заполните данные';
                     }
                 }
-            } else if (currentTab === 'promos') {
-                btn.disabled = false;
-                text.textContent = 'Записаться';
             } else if (currentTab === 'profile' || currentTab === 'info') {
                 btn.disabled = false;
                 text.textContent = 'Записаться';
