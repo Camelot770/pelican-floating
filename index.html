@@ -380,20 +380,33 @@
         .services-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            max-height: 400px;
+            gap: 8px;
+            max-height: 50vh;
             overflow-y: auto;
+            padding-right: 4px;
+        }
+
+        .services-grid::-webkit-scrollbar {
+            width: 3px;
+        }
+
+        .services-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .services-grid::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
         }
 
         .service-card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
+            border-radius: 12px;
+            padding: 12px 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
-            overflow: hidden;
         }
 
         .service-card::before {
@@ -406,13 +419,13 @@
             background: var(--accent-gradient);
             opacity: 0;
             transition: opacity 0.3s ease;
+            border-radius: 12px 0 0 12px;
         }
 
         .service-card:hover,
         .service-card.selected {
             background: var(--bg-card-hover);
             border-color: var(--accent-blue);
-            transform: translateX(4px);
         }
 
         .service-card.selected::before {
@@ -422,55 +435,46 @@
         .service-top {
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 8px;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .service-info {
+            flex: 1;
+            min-width: 0;
         }
 
         .service-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
-            flex: 1;
-            padding-right: 12px;
+            line-height: 1.3;
+            margin-bottom: 2px;
         }
 
         .service-duration {
-            font-size: 12px;
+            font-size: 11px;
             color: var(--text-secondary);
-            margin-top: 2px;
         }
 
         .service-price {
-            font-size: 18px;
+            font-size: 15px;
             font-weight: 700;
             color: var(--accent-cyan);
             white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .service-price.has-variants {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
         }
 
         .service-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+            display: none;
         }
 
         .service-variants-hint {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 8px;
-            padding: 4px 10px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 12px;
-            font-size: 11px;
-            color: var(--accent-blue);
+            display: none;
         }
 
         /* Variant Selection Modal */
@@ -2107,14 +2111,12 @@
                          data-duration="${service.duration}"
                          data-has-variants="${hasVariants ? '1' : '0'}">
                         <div class="service-top">
-                            <div>
+                            <div class="service-info">
                                 <div class="service-name">${service.name}</div>
-                                <div class="service-duration">⏱ ${formatDuration(service.duration)}</div>
+                                <div class="service-duration">⏱ ${formatDuration(service.duration)}${hasVariants ? ' • выбор варианта' : ''}</div>
                             </div>
                             <div class="service-price ${priceClass}">${priceText}</div>
                         </div>
-                        <div class="service-desc">${service.description || ''}</div>
-                        ${hasVariants ? '<div class="service-variants-hint">📋 Выбрать вариант</div>' : ''}
                     </div>
                 `;
             }).join('');
