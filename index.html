@@ -1122,6 +1122,47 @@
             color: var(--text-secondary);
         }
 
+        /* Promotions */
+        .promotions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 14px;
+            padding: 14px 16px;
+        }
+
+        .promo-card.news {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border-color: rgba(59, 130, 246, 0.2);
+        }
+
+        .promo-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+
+        .promo-icon {
+            font-size: 18px;
+        }
+
+        .promo-title {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .promo-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
         /* Bottom Button */
         .bottom-bar {
             position: fixed;
@@ -2022,6 +2063,12 @@
                     <span class="info-arrow">›</span>
                 </div>
 
+                <!-- Акции и новости -->
+                <div id="promotionsSection" style="display: none;">
+                    <div class="section-title" style="margin-top: 24px;">🔥 Акции и новости</div>
+                    <div id="promotionsList" class="promotions-list"></div>
+                </div>
+
                 <div class="section-title" style="margin-top: 24px;">Польза флоатинга</div>
 
                 <div class="benefits">
@@ -2368,6 +2415,7 @@
             updateProfile();
             loadUserBookings();
             loadServices();  // Загружаем услуги из API
+            loadPromotions();  // Загружаем акции
         }
 
         function requestContact() {
@@ -2465,6 +2513,37 @@
                 allServices = fallbackServices;
             }
             renderServices();
+        }
+
+        async function loadPromotions() {
+            try {
+                const data = await apiCall('/api/promotions');
+                if (data && data.promotions && data.promotions.length > 0) {
+                    const container = document.getElementById('promotionsList');
+                    const section = document.getElementById('promotionsSection');
+                    
+                    container.innerHTML = data.promotions.map(p => {
+                        const isPromo = p.promo_type === 'promo';
+                        const icon = isPromo ? '🔥' : '📰';
+                        const cardClass = isPromo ? 'promo-card' : 'promo-card news';
+                        
+                        return `
+                            <div class="${cardClass}">
+                                <div class="promo-header">
+                                    <span class="promo-icon">${icon}</span>
+                                    <span class="promo-title">${p.title}</span>
+                                </div>
+                                ${p.description ? `<div class="promo-desc">${p.description}</div>` : ''}
+                            </div>
+                        `;
+                    }).join('');
+                    
+                    section.style.display = 'block';
+                    console.log('✅ Promotions loaded:', data.promotions.length);
+                }
+            } catch (error) {
+                console.error('Failed to load promotions:', error);
+            }
         }
 
         function renderServices() {
