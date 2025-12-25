@@ -27,6 +27,71 @@
             --error: #ef4444;
             --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
         }
+        
+        /* Светлая тема Пеликан (по логотипу) */
+        [data-theme="pelican"] {
+            --bg-primary: #f9fafb;
+            --bg-secondary: #ffffff;
+            --bg-card: rgba(255, 255, 255, 0.95);
+            --bg-card-hover: rgba(255, 255, 255, 1);
+            --border-color: rgba(30, 58, 138, 0.08);
+            --text-primary: #1e3a8a;
+            --text-secondary: #6b7280;
+            --text-muted: #9ca3af;
+            --accent-blue: #1e3a8a;
+            --accent-cyan: #3b82f6;
+            --accent-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            --accent-gold: #f59e0b;
+            --gold-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            --success: #059669;
+            --warning: #f59e0b;
+            --error: #dc2626;
+            --shadow-glow: 0 0 40px rgba(30, 58, 138, 0.1);
+        }
+        
+        [data-theme="pelican"] .bg-gradient {
+            background: linear-gradient(135deg, rgba(30,58,138,0.05), rgba(59,130,246,0.05));
+        }
+        
+        [data-theme="pelican"] .service-card,
+        [data-theme="pelican"] .cert-card {
+            background: white;
+            box-shadow: 0 2px 12px rgba(30,58,138,0.08);
+        }
+        
+        [data-theme="pelican"] .nav-item.active {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+        }
+        
+        /* Переключатель темы */
+        .theme-toggle {
+            position: fixed;
+            top: 16px;
+            right: 16px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: transform 0.2s, background 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+        
+        .theme-toggle:active {
+            transform: scale(0.95);
+        }
 
         * {
             margin: 0;
@@ -3453,6 +3518,36 @@
         function makeCall2() { window.open('tel:+79172683383'); }
         function openTelegram() { window.open('https://t.me/pelican_float'); }
         function openMaps() { window.open('https://maps.google.com/?q=Казань,+Большая+красная+улица,+8'); }
+        
+        // === ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'pelican' ? '' : 'pelican';
+            
+            if (newTheme) {
+                html.setAttribute('data-theme', newTheme);
+                localStorage.setItem('pelican-theme', newTheme);
+                document.querySelector('.theme-toggle').textContent = '🌙';
+            } else {
+                html.removeAttribute('data-theme');
+                localStorage.removeItem('pelican-theme');
+                document.querySelector('.theme-toggle').textContent = '🦩';
+            }
+        }
+        
+        // Загружаем сохранённую тему
+        (function() {
+            const savedTheme = localStorage.getItem('pelican-theme');
+            if (savedTheme) {
+                document.documentElement.setAttribute('data-theme', savedTheme);
+            }
+        })();
     </script>
+    
+    <!-- Кнопка переключения темы -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="Переключить тему">
+        <script>document.write(localStorage.getItem('pelican-theme') === 'pelican' ? '🌙' : '🦩')</script>
+    </button>
 </body>
 </html>
