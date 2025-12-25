@@ -3,3542 +3,1625 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pelican - Флоат студия в Казани</title>
+    <title>Pelican Float Studio</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Comfortaa:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-primary: #0a0e17;
-            --bg-secondary: #12182a;
-            --bg-card: rgba(255, 255, 255, 0.03);
-            --bg-card-hover: rgba(255, 255, 255, 0.06);
-            --border-color: rgba(255, 255, 255, 0.06);
-            --text-primary: #ffffff;
-            --text-secondary: #8b95a5;
-            --text-muted: #5a6475;
-            --accent-blue: #3b82f6;
-            --accent-cyan: #06b6d4;
-            --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-            --accent-gold: #f59e0b;
-            --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
-            --success: #10b981;
-            --warning: #f59e0b;
-            --error: #ef4444;
-            --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.15);
+            --bg-primary: #0f1923;
+            --bg-secondary: #162130;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --bg-card-hover: rgba(255, 255, 255, 0.08);
+            
+            /* Тёплая бирюзово-лавандовая палитра */
+            --accent-primary: #5EEAD4;
+            --accent-secondary: #A78BFA;
+            --accent-warm: #F472B6;
+            --accent-gold: #FBBF24;
+            
+            --gradient-water: linear-gradient(135deg, #0EA5E9 0%, #5EEAD4 50%, #A78BFA 100%);
+            --gradient-sunset: linear-gradient(135deg, #F472B6 0%, #FBBF24 100%);
+            --gradient-calm: linear-gradient(135deg, #5EEAD4 0%, #A78BFA 100%);
+            --gradient-card: linear-gradient(145deg, rgba(94, 234, 212, 0.1) 0%, rgba(167, 139, 250, 0.05) 100%);
+            
+            --text-primary: #F8FAFC;
+            --text-secondary: rgba(248, 250, 252, 0.6);
+            --text-muted: rgba(248, 250, 252, 0.4);
+            
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            
+            --shadow-glow: 0 0 40px rgba(94, 234, 212, 0.15);
+            --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
         
-        /* Светлая тема Пеликан (по логотипу - тёмно-синий) */
-        [data-theme="pelican"],
-        body.pelican-theme {
-            --bg-primary: #f8f9fa;
-            --bg-secondary: #ffffff;
-            --bg-card: rgba(255, 255, 255, 0.95);
-            --bg-card-hover: rgba(255, 255, 255, 1);
-            --border-color: rgba(30, 58, 138, 0.08);
-            --text-primary: #1e3a8a;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --accent-blue: #1e3a8a;
-            --accent-cyan: #3b82f6;
-            --accent-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            --accent-gold: #1e3a8a;
-            --gold-gradient: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            --success: #059669;
-            --warning: #d97706;
-            --error: #dc2626;
-            --shadow-glow: 0 0 40px rgba(30, 58, 138, 0.1);
-        }
-        
-        [data-theme="pelican"] .bg-gradient,
-        body.pelican-theme .bg-gradient {
-            background: linear-gradient(180deg, rgba(30, 58, 138, 0.05) 0%, transparent 50%);
-        }
-        
-        [data-theme="pelican"] .service-card,
-        [data-theme="pelican"] .cert-card,
-        body.pelican-theme .service-card,
-        body.pelican-theme .cert-card {
-            background: white;
-            box-shadow: 0 2px 12px rgba(30,58,138,0.08);
-            border: 1px solid rgba(30, 58, 138, 0.06);
-        }
-        
-        [data-theme="pelican"] .nav-item.active,
-        body.pelican-theme .nav-item.active {
-            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-            color: white;
-        }
-        
-        [data-theme="pelican"] .header,
-        body.pelican-theme .header {
-            background: linear-gradient(135deg, rgba(30, 58, 138, 0.08), rgba(59, 130, 246, 0.05));
-        }
-        
-        [data-theme="pelican"] .nav,
-        body.pelican-theme .nav {
-            background: rgba(255, 255, 255, 0.98);
-            border-top: 1px solid rgba(30, 58, 138, 0.1);
-        }
-        
-        [data-theme="pelican"] .bottom-btn,
-        body.pelican-theme .bottom-btn {
-            background: linear-gradient(135deg, #1e3a8a, #2563eb);
-        }
-        
-        [data-theme="pelican"] .modal-overlay,
-        body.pelican-theme .modal-overlay {
-            background: rgba(30, 58, 138, 0.3);
-        }
-        
-        [data-theme="pelican"] .modal,
-        body.pelican-theme .modal {
-            background: #ffffff;
-            border: 1px solid rgba(30, 58, 138, 0.1);
-        }
-        
-        .pelican-preview {
-            background: linear-gradient(135deg, #1e3a8a 50%, #f8f9fa 50%);
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
         }
-
+        
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Nunito', sans-serif;
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.5;
         }
-
+        
         /* Animated Background */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.03) 0%, transparent 70%);
-        }
-
-        .floating-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.4;
-            animation: floatOrb 20s ease-in-out infinite;
-            z-index: -1;
-        }
-
-        .orb-1 {
-            width: 300px;
-            height: 300px;
-            background: var(--accent-blue);
-            top: -100px;
-            left: -100px;
-        }
-
-        .orb-2 {
-            width: 200px;
-            height: 200px;
-            background: var(--accent-cyan);
-            bottom: -50px;
-            right: -50px;
-            animation-delay: -10s;
-        }
-
-        @keyframes floatOrb {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, 30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-
-        /* Auth Screen */
-        .auth-screen {
+        .bg-animation {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: var(--bg-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 24px;
-            z-index: 100;
-            text-align: center;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
         }
-
-        .auth-screen.hidden {
-            display: none;
+        
+        .bg-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
         }
-
-        .auth-logo {
-            width: 100px;
-            height: 100px;
-            background: var(--accent-gradient);
-            border-radius: 28px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 50px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow-glow);
+        
+        .bg-blob-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-primary);
+            top: -100px;
+            right: -100px;
+            animation-delay: 0s;
         }
-
-        .auth-title {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        
+        .bg-blob-2 {
+            width: 250px;
+            height: 250px;
+            background: var(--accent-secondary);
+            bottom: 20%;
+            left: -80px;
+            animation-delay: -7s;
         }
-
-        .auth-subtitle {
-            color: var(--text-secondary);
-            font-size: 15px;
-            margin-bottom: 40px;
-            max-width: 280px;
+        
+        .bg-blob-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--accent-warm);
+            top: 40%;
+            right: -60px;
+            animation-delay: -14s;
         }
-
-        .auth-btn {
-            width: 100%;
-            max-width: 300px;
-            padding: 16px 24px;
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 14px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: all 0.3s ease;
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.1); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(40px, 10px) scale(1.05); }
         }
-
-        .auth-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        
+        /* Main Container */
+        .app-container {
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+            min-height: 100vh;
+            padding-bottom: 100px;
         }
-
-        .auth-features {
-            margin-top: 48px;
-            display: flex;
-            gap: 32px;
-        }
-
-        .auth-feature {
-            text-align: center;
-        }
-
-        .auth-feature-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .auth-feature-text {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
+        
         /* Header */
         .header {
-            padding: 16px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            padding: 20px 20px 0;
+            text-align: center;
         }
-
-        .logo {
-            display: flex;
+        
+        .logo-container {
+            display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            padding: 12px 24px;
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+        
         .logo-icon {
             width: 40px;
             height: 40px;
-            background: var(--accent-gradient);
-            border-radius: 12px;
+            background: var(--gradient-water);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-        }
-
-        .logo-text {
             font-size: 20px;
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(94, 234, 212, 0); }
+        }
+        
+        .logo-text {
+            font-family: 'Comfortaa', cursive;
+            font-size: 22px;
             font-weight: 700;
-            background: var(--accent-gradient);
+            background: var(--gradient-water);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        .header-badge {
-            padding: 6px 12px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 20px;
-            font-size: 11px;
-            color: var(--success);
+        
+        /* Navigation Tabs */
+        .nav-tabs {
             display: flex;
-            align-items: center;
-            gap: 6px;
+            gap: 8px;
+            padding: 20px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
         }
-
-        .header-badge::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--success);
-            border-radius: 50%;
-            animation: pulse 2s infinite;
+        
+        .nav-tabs::-webkit-scrollbar {
+            display: none;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-
-        /* Navigation */
-        .nav {
-            display: flex;
-            padding: 0 16px;
-            gap: 6px;
-            margin-bottom: 16px;
-        }
-
-        .nav-item {
+        
+        .nav-tab {
             flex: 1;
-            padding: 12px 8px;
+            min-width: 70px;
+            padding: 16px 12px;
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-secondary);
-            font-size: 12px;
-            font-weight: 500;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 4px;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
         }
-
-        .nav-item.active {
-            background: var(--accent-gradient);
-            color: white;
-            border-color: transparent;
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .nav-icon {
-            font-size: 18px;
-        }
-
-        /* Content */
-        .content {
-            padding: 0 16px 120px;
-        }
-
-        .section {
-            display: none;
-            animation: fadeUp 0.4s ease;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cards */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            backdrop-filter: blur(20px);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
+        
+        .nav-tab:hover {
             background: var(--bg-card-hover);
+            transform: translateY(-2px);
         }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
+        
+        .nav-tab.active {
+            background: var(--gradient-card);
+            border-color: rgba(94, 234, 212, 0.3);
+            box-shadow: var(--shadow-glow);
         }
-
-        .card-icon {
+        
+        .nav-tab-icon {
             width: 44px;
             height: 44px;
-            background: var(--accent-gradient);
-            border-radius: 12px;
+            border-radius: var(--radius-md);
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 22px;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
         }
-
-        .card-title {
-            font-size: 17px;
+        
+        .nav-tab.active .nav-tab-icon {
+            background: var(--gradient-water);
+            transform: scale(1.1);
+        }
+        
+        .nav-tab-label {
+            font-size: 12px;
             font-weight: 600;
-        }
-
-        .card-subtitle {
-            font-size: 13px;
             color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
-
-        /* Category Tabs */
-        .category-tabs {
+        
+        .nav-tab.active .nav-tab-label {
+            color: var(--text-primary);
+        }
+        
+        /* Category Pills */
+        .category-section {
+            padding: 0 20px 16px;
+        }
+        
+        .category-pills {
             display: flex;
-            gap: 8px;
+            gap: 10px;
             overflow-x: auto;
-            padding: 8px 0 16px 0;
+            padding: 4px;
             scrollbar-width: none;
-            -ms-overflow-style: none;
-            margin-bottom: 8px;
         }
-
-        .category-tabs::-webkit-scrollbar {
+        
+        .category-pills::-webkit-scrollbar {
             display: none;
         }
-
-        .category-tab {
-            flex-shrink: 0;
-            padding: 8px 16px;
+        
+        .category-pill {
+            padding: 12px 20px;
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 600;
             color: var(--text-secondary);
+            white-space: nowrap;
             cursor: pointer;
             transition: all 0.3s ease;
-            white-space: nowrap;
         }
-
-        .category-tab.active {
-            background: var(--accent-gradient);
+        
+        .category-pill:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+        }
+        
+        .category-pill.active {
+            background: var(--gradient-calm);
+            color: var(--bg-primary);
             border-color: transparent;
-            color: white;
+            box-shadow: 0 4px 20px rgba(94, 234, 212, 0.3);
         }
-
-        /* Service Cards */
-        .services-grid {
+        
+        /* Services List */
+        .services-section {
+            padding: 0 20px;
+        }
+        
+        .section-title {
+            font-family: 'Comfortaa', cursive;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: var(--gradient-water);
+            border-radius: 2px;
+        }
+        
+        .services-list {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 50vh;
-            overflow-y: auto;
-            padding-right: 4px;
+            gap: 12px;
         }
-
-        .services-grid::-webkit-scrollbar {
-            width: 3px;
-        }
-
-        .services-grid::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        .services-grid::-webkit-scrollbar-thumb {
-            background: var(--border-color);
-            border-radius: 3px;
-        }
-
+        
         .service-card {
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 20px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            overflow: hidden;
         }
-
+        
         .service-card::before {
             content: '';
             position: absolute;
-            left: 0;
             top: 0;
-            width: 3px;
-            height: 100%;
-            background: var(--accent-gradient);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            border-radius: 12px 0 0 12px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-water);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
         }
-
-        .service-card:hover,
-        .service-card.selected {
+        
+        .service-card:hover {
             background: var(--bg-card-hover);
-            border-color: var(--accent-blue);
+            transform: translateX(4px);
+            border-color: rgba(94, 234, 212, 0.2);
         }
-
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card.selected {
+            background: var(--gradient-card);
+            border-color: rgba(94, 234, 212, 0.3);
+            box-shadow: var(--shadow-glow);
+        }
+        
         .service-card.selected::before {
-            opacity: 1;
+            transform: scaleX(1);
         }
-
-        .service-top {
+        
+        .service-header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
+            align-items: flex-start;
+            gap: 14px;
         }
-
-        .service-info {
+        
+        .service-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .service-icon.float {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(94, 234, 212, 0.2) 100%);
+        }
+        
+        .service-icon.massage {
+            background: linear-gradient(135deg, rgba(244, 114, 182, 0.2) 0%, rgba(251, 191, 36, 0.2) 100%);
+        }
+        
+        .service-icon.couple {
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.2) 0%, rgba(244, 114, 182, 0.2) 100%);
+        }
+        
+        .service-icon.meditation {
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.2) 0%, rgba(167, 139, 250, 0.2) 100%);
+        }
+        
+        .service-content {
             flex: 1;
             min-width: 0;
         }
-
+        
         .service-name {
-            font-size: 14px;
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: 2px;
-        }
-
-        .service-duration {
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
-
-        .service-price {
-            font-size: 15px;
-            font-weight: 700;
-            color: var(--accent-cyan);
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .service-price.has-variants {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .service-desc {
-            display: none;
-        }
-
-        .service-variants-hint {
-            display: none;
-        }
-
-        /* Variant Selection Modal */
-        .variant-modal {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border-radius: 24px 24px 0 0;
-            padding: 24px 20px;
-            z-index: 1000;
-            animation: slideUp 0.3s ease;
-            max-height: 70vh;
-            overflow-y: auto;
-        }
-
-        .variant-modal.show {
-            display: block;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(100%); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .variant-modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 999;
-        }
-
-        .variant-modal-overlay.show {
-            display: block;
-        }
-
-        .variant-modal-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .variant-modal-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-
-        .variant-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .variant-option {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .variant-option:hover,
-        .variant-option.selected {
-            background: var(--bg-card-hover);
-            border-color: var(--accent-blue);
-        }
-
-        .variant-option.selected {
-            background: rgba(59, 130, 246, 0.1);
-        }
-
-        .variant-label {
-            font-size: 15px;
-            font-weight: 500;
-        }
-
-        .variant-price {
             font-size: 16px;
             font-weight: 700;
-            color: var(--accent-cyan);
+            margin-bottom: 6px;
+            line-height: 1.3;
         }
-
-        .variant-confirm-btn {
-            width: 100%;
-            padding: 16px;
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            margin-top: 20px;
-            cursor: pointer;
+        
+        .service-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
         }
-
-        .empty-category {
-            text-align: center;
-            padding: 40px 20px;
+        
+        .service-duration {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 13px;
             color: var(--text-secondary);
         }
-
-        .empty-category-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
+        
+        .service-tag {
+            padding: 4px 10px;
+            background: rgba(94, 234, 212, 0.15);
+            border-radius: 100px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--accent-primary);
         }
-
-        /* Date Picker */
-        .date-picker {
+        
+        .service-description {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+        
+        .service-price {
+            font-family: 'Comfortaa', cursive;
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--gradient-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-left: auto;
+            white-space: nowrap;
+        }
+        
+        .service-price-small {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--text-muted);
+            -webkit-text-fill-color: var(--text-muted);
+        }
+        
+        /* Date Selection */
+        .date-section {
+            padding: 24px 20px;
+        }
+        
+        .date-header {
             display: flex;
-            gap: 8px;
-            overflow-x: auto;
-            padding: 8px 0;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
         }
-
-        .date-picker::-webkit-scrollbar {
+        
+        .date-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-card);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 1px solid rgba(94, 234, 212, 0.2);
+        }
+        
+        .date-title {
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .date-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .date-scroll {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 4px;
+            scrollbar-width: none;
+        }
+        
+        .date-scroll::-webkit-scrollbar {
             display: none;
         }
-
+        
         .date-item {
-            min-width: 58px;
-            padding: 12px 8px;
+            min-width: 70px;
+            padding: 16px 12px;
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            flex-shrink: 0;
         }
-
-        .date-item:hover:not(.disabled) {
-            border-color: var(--accent-blue);
+        
+        .date-item:hover {
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
         }
-
+        
         .date-item.selected {
-            background: var(--accent-gradient);
+            background: var(--gradient-calm);
             border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(94, 234, 212, 0.3);
         }
-
-        .date-item.disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
+        
+        .date-item.selected .date-day,
+        .date-item.selected .date-num,
+        .date-item.selected .date-month {
+            color: var(--bg-primary);
         }
-
+        
         .date-day {
-            font-size: 10px;
+            font-size: 12px;
+            font-weight: 600;
             color: var(--text-secondary);
             text-transform: uppercase;
-            font-weight: 500;
+            margin-bottom: 4px;
         }
-
-        .date-item.selected .date-day {
-            color: rgba(255,255,255,0.7);
-        }
-
+        
         .date-num {
-            font-size: 18px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 24px;
             font-weight: 700;
-            margin: 2px 0;
+            color: var(--text-primary);
         }
-
+        
         .date-month {
-            font-size: 10px;
-            color: var(--text-secondary);
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
         }
-
-        .date-item.selected .date-month {
-            color: rgba(255,255,255,0.7);
+        
+        /* Time Slots */
+        .time-section {
+            padding: 0 20px 24px;
         }
-
-        /* Time Grid */
+        
+        .time-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        
+        .time-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gradient-card);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            border: 1px solid rgba(167, 139, 250, 0.2);
+        }
+        
         .time-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
+            gap: 10px;
         }
-
+        
         .time-slot {
             padding: 14px 8px;
             background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 600;
         }
-
+        
         .time-slot:hover:not(.disabled) {
-            border-color: var(--accent-blue);
+            background: var(--bg-card-hover);
+            border-color: rgba(167, 139, 250, 0.3);
         }
-
+        
         .time-slot.selected {
-            background: var(--accent-gradient);
+            background: var(--gradient-calm);
             border-color: transparent;
+            color: var(--bg-primary);
+            box-shadow: 0 4px 16px rgba(167, 139, 250, 0.3);
         }
-
+        
         .time-slot.disabled {
             opacity: 0.3;
             cursor: not-allowed;
-            text-decoration: line-through;
         }
-
-        .no-slots {
-            text-align: center;
-            padding: 40px 20px;
-            color: var(--text-secondary);
-        }
-
-        .no-slots-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-
-        /* Certificate Cards */
-        .cert-card {
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(239, 68, 68, 0.05) 100%);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            border-radius: 16px;
-            padding: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .cert-card:hover,
-        .cert-card.selected {
-            border-color: var(--accent-gold);
-            transform: translateY(-2px);
-        }
-
-        .cert-badge {
-            display: inline-block;
-            background: var(--gold-gradient);
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .cert-name {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .cert-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .cert-price {
-            font-size: 20px;
-            font-weight: 700;
-            background: var(--gold-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Profile Section */
-        .profile-header {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 16px;
-            text-align: center;
-        }
-
-        .profile-avatar {
-            width: 80px;
-            height: 80px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin: 0 auto 16px;
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
-        }
-
-        .profile-name {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .profile-phone {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 16px;
-        }
-
-        .profile-stats {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-        }
-
-        .profile-stat {
-            text-align: center;
-        }
-
-        .profile-stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--accent-cyan);
-        }
-
-        .profile-stat-label {
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-        }
-
-        /* Booking Cards in Profile */
-        .booking-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .booking-card.past {
-            opacity: 0.6;
-        }
-
-        .booking-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .booking-status.confirmed {
-            background: rgba(16, 185, 129, 0.15);
-            color: var(--success);
-        }
-
-        .booking-status.cancelled {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--error);
-        }
-
-        .booking-status.completed {
-            background: rgba(139, 149, 165, 0.15);
-            color: var(--text-secondary);
-        }
-
-        .booking-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .booking-service {
-            font-size: 15px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .booking-datetime {
-            display: flex;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .booking-datetime span {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .booking-price {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--accent-cyan);
-        }
-
-        .booking-actions {
-            margin-top: 12px;
-            padding-top: 12px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .btn-cancel {
-            padding: 10px 16px;
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 10px;
-            color: var(--error);
-            font-size: 13px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-cancel:hover {
-            background: rgba(239, 68, 68, 0.2);
-        }
-
-        .bookings-tabs {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-
-        .bookings-tab {
-            flex: 1;
-            padding: 10px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            cursor: pointer;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .bookings-tab.active {
-            background: var(--accent-gradient);
-            color: white;
-            border-color: transparent;
-        }
-
+        
+        /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 48px 24px;
-            color: var(--text-secondary);
+            padding: 40px 20px;
         }
-
-        .empty-state-icon {
-            font-size: 56px;
+        
+        .empty-icon {
+            font-size: 48px;
             margin-bottom: 16px;
-            opacity: 0.3;
+            animation: bounce 2s ease-in-out infinite;
         }
-
-        .empty-state-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
-
-        .empty-state-text {
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        .empty-state-btn {
-            display: inline-flex;
-            padding: 12px 24px;
-            background: var(--accent-gradient);
-            border-radius: 12px;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Form Inputs */
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 14px 16px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
+        
+        .empty-text {
             font-size: 15px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .form-input::placeholder {
-            color: var(--text-muted);
-        }
-
-        /* Summary */
-        .summary {
-            background: rgba(59, 130, 246, 0.08);
-            border: 1px solid rgba(59, 130, 246, 0.2);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-
-        .summary.gold {
-            background: rgba(245, 158, 11, 0.08);
-            border-color: rgba(245, 158, 11, 0.2);
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            font-size: 14px;
-        }
-
-        .summary-label {
             color: var(--text-secondary);
         }
-
-        .summary-value {
-            font-weight: 500;
-        }
-
-        .summary-total {
-            border-top: 1px solid var(--border-color);
-            margin-top: 8px;
-            padding-top: 12px;
-            font-size: 18px;
-            font-weight: 700;
-        }
-
-        .summary-total .summary-value {
-            color: var(--accent-cyan);
-        }
-
-        /* Info Section */
-        .info-card {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 16px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .info-card:hover {
-            background: var(--bg-card-hover);
-            transform: translateX(4px);
-        }
-
-        .info-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .info-content {
-            flex: 1;
-        }
-
-        .info-title {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 2px;
-        }
-
-        .info-subtitle {
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .info-arrow {
-            color: var(--text-muted);
-            font-size: 18px;
-        }
-
-        /* Benefits */
-        .benefits {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 10px;
-        }
-
-        .benefit {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 16px;
-            text-align: center;
-        }
-
-        .benefit-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
-        }
-
-        .benefit-title {
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .benefit-desc {
-            font-size: 11px;
-            color: var(--text-secondary);
-        }
-
-        /* Promotions */
-        .promotions-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .promo-card {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 14px;
-            padding: 14px 16px;
-        }
-
-        .promo-card.news {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
-            border-color: rgba(59, 130, 246, 0.2);
-        }
-
-        .promo-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 6px;
-        }
-
-        .promo-icon {
-            font-size: 18px;
-        }
-
-        .promo-title {
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .promo-desc {
-            font-size: 13px;
-            color: var(--text-secondary);
-            line-height: 1.4;
-        }
-
+        
         /* Bottom Button */
         .bottom-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            padding: 16px;
+            padding: 16px 20px;
+            padding-bottom: calc(16px + env(safe-area-inset-bottom));
             background: linear-gradient(to top, var(--bg-primary) 60%, transparent);
+            z-index: 100;
         }
-
-        .btn-primary {
+        
+        .main-button {
             width: 100%;
-            padding: 16px;
-            background: var(--accent-gradient);
+            padding: 18px 32px;
+            background: var(--gradient-water);
             border: none;
-            border-radius: 14px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
+            border-radius: var(--radius-lg);
+            font-family: 'Nunito', sans-serif;
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--bg-primary);
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: 0 8px 32px rgba(94, 234, 212, 0.4);
+        }
+        
+        .main-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(94, 234, 212, 0.5);
+        }
+        
+        .main-button:active {
+            transform: scale(0.98);
+        }
+        
+        .main-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Profile Section */
+        .profile-section {
+            padding: 20px;
+            display: none;
+        }
+        
+        .profile-section.active {
+            display: block;
+        }
+        
+        .profile-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-water);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            font-size: 40px;
+            margin: 0 auto 16px;
+            box-shadow: var(--shadow-glow);
         }
-
-        .btn-primary.gold {
-            background: var(--gold-gradient);
+        
+        .profile-name {
+            font-family: 'Comfortaa', cursive;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
-
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+        
+        .profile-phone {
+            font-size: 14px;
+            color: var(--text-secondary);
         }
-
-        .btn-primary:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
         }
-
-        .btn-primary.loading::after {
-            content: '';
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+        
+        .stat-card {
+            background: var(--gradient-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            text-align: center;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
+        
+        .stat-value {
+            font-family: 'Comfortaa', cursive;
+            font-size: 32px;
+            font-weight: 700;
+            background: var(--gradient-water);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
+        
+        .stat-label {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+        }
+        
+        /* History */
+        .history-section {
+            padding: 20px;
+            display: none;
+        }
+        
+        .history-section.active {
+            display: block;
+        }
+        
+        .history-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .history-tab {
+            flex: 1;
+            padding: 14px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-md);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .history-tab.active {
+            background: var(--gradient-calm);
+            color: var(--bg-primary);
+            border-color: transparent;
+        }
+        
+        .booking-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .booking-status {
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.85);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 200;
-            padding: 24px;
-            backdrop-filter: blur(10px);
+            height: 3px;
         }
-
-        .modal-overlay.active {
-            display: flex;
+        
+        .booking-status.upcoming {
+            background: var(--gradient-water);
         }
-
-        .modal {
-            background: var(--bg-secondary);
-            border-radius: 24px;
-            padding: 32px 24px;
-            text-align: center;
-            max-width: 340px;
-            width: 100%;
-            animation: modalIn 0.3s ease;
+        
+        .booking-status.completed {
+            background: rgba(94, 234, 212, 0.3);
         }
-
-        @keyframes modalIn {
-            from { transform: scale(0.9); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
+        
+        .booking-status.cancelled {
+            background: rgba(244, 114, 182, 0.5);
         }
-
-        .modal-icon {
-            width: 72px;
-            height: 72px;
-            background: var(--accent-gradient);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin: 0 auto 20px;
-            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
-        }
-
-        .modal-icon.gold {
-            background: var(--gold-gradient);
-        }
-
-        .modal-icon.error {
-            background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-        }
-
-        .modal-title {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .modal-text {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 24px;
-        }
-
-        .modal-details {
-            background: var(--bg-card);
-            border-radius: 14px;
-            padding: 16px;
-            margin-bottom: 24px;
-            text-align: left;
-        }
-
-        .modal-detail-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 6px 0;
-            font-size: 13px;
-        }
-
-        .modal-detail-row span:first-child {
-            color: var(--text-secondary);
-        }
-
-        .modal-btn {
-            width: 100%;
-            padding: 14px;
-            background: var(--accent-gradient);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Cancel Confirmation Modal */
-        .modal-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .modal-btn-secondary {
-            flex: 1;
-            padding: 14px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-        }
-
-        .modal-btn-danger {
-            flex: 1;
-            padding: 14px;
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 12px;
-            color: var(--error);
-            font-size: 15px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Toast */
-        .toast {
-            position: fixed;
-            bottom: 100px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-size: 14px;
-            display: none;
-            z-index: 150;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .toast.show {
-            display: block;
-            animation: toastIn 0.3s ease;
-        }
-
-        @keyframes toastIn {
-            from { opacity: 0; transform: translate(-50%, 20px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
-        }
-
-        /* Section Title */
-        .section-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            padding-left: 4px;
-        }
-
-        /* Promo Cards */
-        .promo-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .promo-card.promo-info {
-            border-color: rgba(59, 130, 246, 0.3);
-            background: rgba(59, 130, 246, 0.05);
-        }
-
-        .promo-badge {
+        
+        .booking-badge {
             display: inline-block;
-            padding: 4px 10px;
-            background: linear-gradient(135deg, #f97316, #ef4444);
-            border-radius: 8px;
+            padding: 4px 12px;
+            border-radius: 100px;
             font-size: 11px;
             font-weight: 600;
-            color: white;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
-
-        .promo-title {
+        
+        .booking-badge.upcoming {
+            background: rgba(94, 234, 212, 0.15);
+            color: var(--accent-primary);
+        }
+        
+        .booking-badge.completed {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-secondary);
+        }
+        
+        .booking-badge.cancelled {
+            background: rgba(244, 114, 182, 0.15);
+            color: var(--accent-warm);
+        }
+        
+        .booking-service {
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 8px;
         }
-
-        .promo-desc {
+        
+        .booking-details {
+            display: flex;
+            gap: 16px;
             font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        .booking-detail {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .booking-price {
+            margin-top: 12px;
+            font-family: 'Comfortaa', cursive;
+            font-size: 18px;
+            font-weight: 700;
+            background: var(--gradient-sunset);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 20px;
+            display: none;
+        }
+        
+        .about-section.active {
+            display: block;
+        }
+        
+        .about-hero {
+            background: var(--gradient-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-xl);
+            padding: 32px 24px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .about-emoji {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+        
+        .about-title {
+            font-family: 'Comfortaa', cursive;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: var(--gradient-water);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .about-subtitle {
+            font-size: 14px;
             color: var(--text-secondary);
             line-height: 1.5;
         }
-
-        .promo-footer {
-            margin-top: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .promo-valid {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        /* Certificate Type Tabs */
-        .cert-type-tabs {
-            display: flex;
-            gap: 8px;
-            margin: 16px 0;
-            background: var(--bg-primary);
-            padding: 4px;
-            border-radius: 12px;
-        }
-
-        .cert-type-tab {
-            flex: 1;
-            padding: 10px 16px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-secondary);
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cert-type-tab.active {
-            background: var(--accent-gradient);
-            color: white;
-        }
-
-        .cert-list {
+        
+        .info-cards {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-        }
-
-        .cert-services-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .cert-service-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 14px;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .cert-service-item:hover,
-        .cert-service-item.selected {
-            border-color: var(--accent-blue);
-            background: var(--bg-card-hover);
-        }
-
-        .cert-service-name {
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .cert-service-price {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent-cyan);
-        }
-
-        /* Settings */
-        .settings-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-        }
-
-        .setting-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .setting-row.clickable {
-            cursor: pointer;
-        }
-
-        .setting-info {
-            display: flex;
-            align-items: center;
             gap: 12px;
         }
-
-        .setting-icon {
-            font-size: 24px;
+        
+        .info-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-
-        .setting-title {
+        
+        .info-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
+        }
+        
+        .info-icon {
+            width: 44px;
+            height: 44px;
+            background: var(--gradient-card);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        
+        .info-content {
+            flex: 1;
+        }
+        
+        .info-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-bottom: 2px;
+        }
+        
+        .info-value {
             font-size: 15px;
             font-weight: 600;
         }
-
-        .setting-desc {
-            font-size: 12px;
-            color: var(--text-secondary);
-            margin-top: 2px;
-        }
-
-        .setting-arrow {
-            font-size: 20px;
+        
+        .info-arrow {
             color: var(--text-muted);
         }
-
-        /* Theme Selector */
-        .theme-selector {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
+        
+        /* Gifts Section */
+        .gifts-section {
+            padding: 20px;
+            display: none;
         }
-
-        .theme-option {
-            flex: 1;
+        
+        .gifts-section.active {
+            display: block;
+        }
+        
+        .gift-banner {
+            background: var(--gradient-sunset);
+            border-radius: var(--radius-xl);
+            padding: 24px;
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gift-banner::before {
+            content: '🎁';
+            position: absolute;
+            font-size: 120px;
+            opacity: 0.15;
+            top: -20px;
+            right: -20px;
+        }
+        
+        .gift-banner-title {
+            font-family: 'Comfortaa', cursive;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--bg-primary);
+            margin-bottom: 8px;
+        }
+        
+        .gift-banner-text {
+            font-size: 14px;
+            color: rgba(15, 25, 35, 0.7);
+        }
+        
+        .gift-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            margin-bottom: 12px;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
+            gap: 16px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-
-        .theme-option.active {
-            border-color: var(--accent-blue);
-            background: rgba(59, 130, 246, 0.1);
+        
+        .gift-card:hover {
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
         }
-
-        .theme-option span {
-            font-size: 12px;
-            font-weight: 500;
+        
+        .gift-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--gradient-card);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        
+        .gift-info {
+            flex: 1;
+        }
+        
+        .gift-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .gift-desc {
+            font-size: 13px;
             color: var(--text-secondary);
         }
-
-        .theme-option.active span {
-            color: var(--accent-blue);
+        
+        .gift-price {
+            font-family: 'Comfortaa', cursive;
+            font-size: 18px;
+            font-weight: 700;
+            background: var(--gradient-water);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-
-        .theme-preview {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.4s ease;
         }
-
-        .dark-preview {
-            background: linear-gradient(135deg, #1a1a2e 50%, #16213e 50%);
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-
-        .light-preview {
-            background: linear-gradient(135deg, #ffffff 50%, #f3f4f6 50%);
+        
+        .scale-in {
+            animation: scaleIn 0.3s ease;
         }
-
-        .auto-preview {
-            background: linear-gradient(135deg, #1a1a2e 50%, #ffffff 50%);
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
         }
-
-        /* Light Theme */
-        body.light-theme {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f1f5f9;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
-            --border-color: #e2e8f0;
+        
+        /* Loading */
+        .loading {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
         }
-
-        body.light-theme .bg-gradient {
-            background: 
-                radial-gradient(ellipse at 20% 20%, rgba(59, 130, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+        
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 3px solid rgba(94, 234, 212, 0.2);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
-
-        body.light-theme .header {
-            background: rgba(255, 255, 255, 0.9);
-            border-bottom-color: #e2e8f0;
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
-
-        body.light-theme .nav {
-            background: rgba(255, 255, 255, 0.95);
-            border-top-color: #e2e8f0;
-        }
-
-        body.light-theme .bottom-btn {
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        body.light-theme .summary {
-            background: #f8fafc;
-        }
-
-        body.light-theme .modal-overlay {
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        body.light-theme .promo-card {
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        
+        .loading-text {
+            margin-top: 16px;
+            font-size: 14px;
+            color: var(--text-secondary);
         }
     </style>
 </head>
 <body>
-    <div class="bg-gradient"></div>
-    <div class="floating-orb orb-1"></div>
-    <div class="floating-orb orb-2"></div>
-
-    <!-- Auth Screen -->
-    <div class="auth-screen" id="authScreen">
-        <div class="auth-logo">🦩</div>
-        <h1 class="auth-title">Pelican</h1>
-        <p class="auth-subtitle">Флоат студия в центре Казани. Войдите, чтобы записаться и управлять своими записями</p>
-        
-        <button class="auth-btn" onclick="requestContact()">
-            <span>📱</span>
-            <span>Войти по номеру телефона</span>
-        </button>
-        
-        <div class="auth-features">
-            <div class="auth-feature">
-                <div class="auth-feature-icon">📅</div>
-                <div class="auth-feature-text">Онлайн-запись</div>
-            </div>
-            <div class="auth-feature">
-                <div class="auth-feature-icon">👤</div>
-                <div class="auth-feature-text">Личный кабинет</div>
-            </div>
-            <div class="auth-feature">
-                <div class="auth-feature-icon">🎁</div>
-                <div class="auth-feature-text">Сертификаты</div>
-            </div>
-        </div>
+    <div class="bg-animation">
+        <div class="bg-blob bg-blob-1"></div>
+        <div class="bg-blob bg-blob-2"></div>
+        <div class="bg-blob bg-blob-3"></div>
     </div>
-
-    <!-- Main App -->
-    <div id="mainApp" style="display: none;">
+    
+    <div class="app-container">
         <!-- Header -->
         <header class="header">
-            <div class="logo">
-                <div class="logo-icon">🦩</div>
-                <div class="logo-text">ПЕЛИКАН</div>
+            <div class="logo-container">
+                <div class="logo-icon">🌊</div>
+                <span class="logo-text">Pelican Float</span>
             </div>
-            <div class="header-badge">10:00 — 20:00</div>
         </header>
-
+        
         <!-- Navigation -->
-        <nav class="nav">
-            <div class="nav-item active" data-tab="booking">
-                <span class="nav-icon">💧</span>
-                <span>Запись</span>
+        <nav class="nav-tabs">
+            <div class="nav-tab active" data-tab="booking">
+                <div class="nav-tab-icon">💧</div>
+                <span class="nav-tab-label">Запись</span>
             </div>
-            <div class="nav-item" data-tab="certificates">
-                <span class="nav-icon">🎁</span>
-                <span>Сертификаты</span>
+            <div class="nav-tab" data-tab="gifts">
+                <div class="nav-tab-icon">🎁</div>
+                <span class="nav-tab-label">Подарки</span>
             </div>
-            <div class="nav-item" data-tab="profile">
-                <span class="nav-icon">👤</span>
-                <span>Профиль</span>
+            <div class="nav-tab" data-tab="profile">
+                <div class="nav-tab-icon">👤</div>
+                <span class="nav-tab-label">Профиль</span>
             </div>
-            <div class="nav-item" data-tab="info">
-                <span class="nav-icon">ℹ️</span>
-                <span>О нас</span>
+            <div class="nav-tab" data-tab="about">
+                <div class="nav-tab-icon">ℹ️</div>
+                <span class="nav-tab-label">О нас</span>
             </div>
         </nav>
-
-        <!-- Content -->
-        <main class="content">
-            <!-- Booking Section -->
-            <section id="booking" class="section active">
-                <div class="section-title">Выберите услугу</div>
-                
-                <!-- Category Tabs -->
-                <div class="category-tabs" id="categoryTabs">
-                    <div class="category-tab active" data-category="all">Все</div>
-                    <div class="category-tab" data-category="floating">Флоатинг</div>
-                    <div class="category-tab" data-category="couples">Для двоих</div>
-                    <div class="category-tab" data-category="massage">Массаж</div>
-                    <div class="category-tab" data-category="spa">SPA-ритуалы</div>
+        
+        <!-- Booking Section -->
+        <section class="booking-section active" id="booking">
+            <!-- Categories -->
+            <div class="category-section">
+                <div class="category-pills">
+                    <div class="category-pill active" data-category="all">✨ Все</div>
+                    <div class="category-pill" data-category="float">🌊 Флоатинг</div>
+                    <div class="category-pill" data-category="couple">💕 Для двоих</div>
+                    <div class="category-pill" data-category="massage">🙌 Массаж</div>
                 </div>
-                
-                <div class="services-grid" id="servicesList">
-                    <div class="empty-category">
-                        <div class="empty-category-icon">⏳</div>
-                        <div>Загрузка услуг...</div>
-                    </div>
+            </div>
+            
+            <!-- Services -->
+            <div class="services-section">
+                <h2 class="section-title">Выберите услугу</h2>
+                <div class="services-list" id="servicesList">
+                    <!-- Services will be loaded here -->
                 </div>
-
-                <!-- Date Selection -->
-                <div class="card" id="dateCard" style="display: none;">
-                    <div class="card-header">
-                        <div class="card-icon">📅</div>
-                        <div>
-                            <div class="card-title">Выберите дату</div>
-                            <div class="card-subtitle">Ближайшие 14 дней</div>
-                        </div>
-                    </div>
-                    <div class="date-picker" id="datePicker"></div>
-                </div>
-
-                <!-- Time Selection -->
-                <div class="card" id="timeCard" style="display: none;">
-                    <div class="card-header">
-                        <div class="card-icon">🕐</div>
-                        <div>
-                            <div class="card-title">Выберите время</div>
-                            <div class="card-subtitle" id="selectedDateText">Свободные слоты</div>
-                        </div>
-                    </div>
-                    <div class="time-grid" id="timeGrid"></div>
-                    <div id="noSlots" class="no-slots" style="display: none;">
-                        <div class="no-slots-icon">😔</div>
-                        <p>Нет свободных слотов на эту дату</p>
+            </div>
+            
+            <!-- Date Selection -->
+            <div class="date-section" id="dateSection" style="display: none;">
+                <div class="date-header">
+                    <div class="date-icon">📅</div>
+                    <div>
+                        <div class="date-title">Выберите дату</div>
+                        <div class="date-subtitle">Ближайшие 14 дней</div>
                     </div>
                 </div>
-
-                <!-- Summary -->
-                <div class="summary" id="bookingSummary" style="display: none;">
-                    <div class="summary-row">
-                        <span class="summary-label">Услуга</span>
-                        <span class="summary-value" id="sumService">-</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Дата</span>
-                        <span class="summary-value" id="sumDate">-</span>
-                    </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Время</span>
-                        <span class="summary-value" id="sumTime">-</span>
-                    </div>
-                    <div class="summary-row summary-total">
-                        <span class="summary-label">Итого</span>
-                        <span class="summary-value" id="sumTotal">-</span>
+                <div class="date-scroll" id="dateScroll">
+                    <!-- Dates will be loaded here -->
+                </div>
+            </div>
+            
+            <!-- Time Selection -->
+            <div class="time-section" id="timeSection" style="display: none;">
+                <div class="time-header">
+                    <div class="time-icon">🕐</div>
+                    <div>
+                        <div class="date-title">Выберите время</div>
+                        <div class="date-subtitle" id="selectedDateText">--</div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Certificates Section -->
-            <section id="certificates" class="section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: var(--gold-gradient);">🎁</div>
-                        <div>
-                            <div class="card-title">Подарочные сертификаты</div>
-                            <div class="card-subtitle">Электронный PDF на email</div>
-                        </div>
-                    </div>
-
-                    <!-- Certificate Type Tabs -->
-                    <div class="cert-type-tabs">
-                        <div class="cert-type-tab active" data-cert-type="nominal">По номиналу</div>
-                        <div class="cert-type-tab" data-cert-type="service">На услугу</div>
-                    </div>
-
-                    <!-- Nominal Certificates -->
-                    <div id="nominalCerts" class="cert-list">
-                        <div class="cert-card" data-cert="nominal-2000" data-price="2000">
-                            <div class="cert-badge">🎁</div>
-                            <div class="cert-name">Сертификат на 2 000 ₽</div>
-                            <div class="cert-desc">Можно использовать на любую услугу</div>
-                            <div class="cert-price">2 000 ₽</div>
-                        </div>
-
-                        <div class="cert-card" data-cert="nominal-3000" data-price="3000">
-                            <div class="cert-badge">🎁</div>
-                            <div class="cert-name">Сертификат на 3 000 ₽</div>
-                            <div class="cert-desc">Можно использовать на любую услугу</div>
-                            <div class="cert-price">3 000 ₽</div>
-                        </div>
-
-                        <div class="cert-card" data-cert="nominal-5000" data-price="5000">
-                            <div class="cert-badge">⭐ Популярный</div>
-                            <div class="cert-name">Сертификат на 5 000 ₽</div>
-                            <div class="cert-desc">Можно использовать на любую услугу</div>
-                            <div class="cert-price">5 000 ₽</div>
-                        </div>
-
-                        <div class="cert-card" data-cert="nominal-10000" data-price="10000">
-                            <div class="cert-badge">💎 Премиум</div>
-                            <div class="cert-name">Сертификат на 10 000 ₽</div>
-                            <div class="cert-desc">Можно использовать на любые услуги</div>
-                            <div class="cert-price">10 000 ₽</div>
-                        </div>
-
-                        <div class="cert-card" data-cert="nominal-20000" data-price="20000">
-                            <div class="cert-badge">👑 VIP</div>
-                            <div class="cert-name">Сертификат на 20 000 ₽</div>
-                            <div class="cert-desc">Максимальный номинал</div>
-                            <div class="cert-price">20 000 ₽</div>
-                        </div>
-                    </div>
-
-                    <!-- Service Certificates -->
-                    <div id="serviceCerts" class="cert-list" style="display: none;">
-                        <div class="cert-services-list" id="certServicesList">
-                            <!-- Заполняется динамически -->
-                        </div>
-                    </div>
+                <div class="time-grid" id="timeGrid">
+                    <!-- Time slots will be loaded here -->
                 </div>
-
-                <!-- Certificate Form -->
-                <div class="card" id="certForm" style="display: none;">
-                    <div class="card-header">
-                        <div class="card-icon" style="background: var(--gold-gradient);">👤</div>
-                        <div>
-                            <div class="card-title">Данные получателя</div>
-                        </div>
+            </div>
+        </section>
+        
+        <!-- Gifts Section -->
+        <section class="gifts-section" id="gifts">
+            <div class="gift-banner">
+                <div class="gift-banner-title">Подарочные сертификаты</div>
+                <div class="gift-banner-text">Идеальный подарок для близких</div>
+            </div>
+            
+            <div class="gifts-list">
+                <div class="gift-card">
+                    <div class="gift-icon">🎀</div>
+                    <div class="gift-info">
+                        <div class="gift-name">Флоатинг 60 минут</div>
+                        <div class="gift-desc">Погружение в невесомость</div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Имя получателя</label>
-                        <input type="text" id="certRecipient" class="form-input" placeholder="Кому дарите?" enterkeyhint="next">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Телефон получателя</label>
-                        <input type="tel" id="certPhone" class="form-input" placeholder="+7 (___) ___-__-__" enterkeyhint="next">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Telegram получателя (если есть)</label>
-                        <input type="text" id="certTelegram" class="form-input" placeholder="@username" enterkeyhint="next">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Поздравление (необязательно)</label>
-                        <input type="text" id="certMessage" class="form-input" placeholder="С днём рождения! 🎉" enterkeyhint="done">
-                    </div>
+                    <div class="gift-price">2 500 ₽</div>
                 </div>
-
-                <!-- Certificate Summary -->
-                <div class="summary gold" id="certSummary" style="display: none;">
-                    <div class="summary-row">
-                        <span class="summary-label">Сертификат</span>
-                        <span class="summary-value" id="certSumName">-</span>
+                <div class="gift-card">
+                    <div class="gift-icon">💎</div>
+                    <div class="gift-info">
+                        <div class="gift-name">Флоатинг 120 минут</div>
+                        <div class="gift-desc">Глубокая релаксация</div>
                     </div>
-                    <div class="summary-row">
-                        <span class="summary-label">Получатель</span>
-                        <span class="summary-value" id="certSumRecipient">-</span>
+                    <div class="gift-price">3 800 ₽</div>
+                </div>
+                <div class="gift-card">
+                    <div class="gift-icon">💑</div>
+                    <div class="gift-info">
+                        <div class="gift-name">Романтик для двоих</div>
+                        <div class="gift-desc">Флоатинг + массаж</div>
                     </div>
-                    <div class="summary-row summary-total">
-                        <span class="summary-label">К оплате</span>
-                        <span class="summary-value" id="certSumTotal">-</span>
+                    <div class="gift-price">7 500 ₽</div>
+                </div>
+                <div class="gift-card">
+                    <div class="gift-icon">👑</div>
+                    <div class="gift-info">
+                        <div class="gift-name">VIP Сертификат</div>
+                        <div class="gift-desc">Любые услуги на выбор</div>
                     </div>
+                    <div class="gift-price">10 000 ₽</div>
                 </div>
-            </section>
-
-            <!-- Profile Section -->
-            <section id="profile" class="section">
-                <div class="profile-header">
-                    <div class="profile-avatar" id="profileAvatar">👤</div>
-                    <div class="profile-name" id="profileName">Загрузка...</div>
-                    <div class="profile-phone" id="profilePhone"></div>
-                    <div class="profile-stats">
-                        <div class="profile-stat">
-                            <div class="profile-stat-value" id="statBookings">0</div>
-                            <div class="profile-stat-label">Записей</div>
-                        </div>
-                        <div class="profile-stat">
-                            <div class="profile-stat-value" id="statVisits">0</div>
-                            <div class="profile-stat-label">Визитов</div>
-                        </div>
-                    </div>
+            </div>
+        </section>
+        
+        <!-- Profile Section -->
+        <section class="profile-section" id="profile">
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <div class="profile-name" id="userName">Гость</div>
+                <div class="profile-phone" id="userPhone">Загрузка...</div>
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalBookings">0</div>
+                    <div class="stat-label">Записей</div>
                 </div>
-
-                <div class="bookings-tabs">
-                    <div class="bookings-tab active" data-filter="upcoming">Предстоящие</div>
-                    <div class="bookings-tab" data-filter="past">История</div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalVisits">0</div>
+                    <div class="stat-label">Визитов</div>
                 </div>
-
-                <div id="bookingsList">
-                    <!-- Заполняется JS -->
-                </div>
-
-                <div id="emptyBookings" class="empty-state" style="display: none;">
-                    <div class="empty-state-icon">📅</div>
-                    <div class="empty-state-title">Нет записей</div>
-                    <div class="empty-state-text">Запишитесь на сеанс флоатинга прямо сейчас</div>
-                    <div class="empty-state-btn" onclick="switchTab('booking')">Записаться</div>
-                </div>
-
-                <!-- Settings -->
-                <div class="section-title" style="margin-top: 24px;">Настройки</div>
-                
-                <div class="settings-card">
-                    <div class="setting-row">
-                        <div class="setting-info">
-                            <div class="setting-icon">🎨</div>
-                            <div>
-                                <div class="setting-title">Тема оформления</div>
-                                <div class="setting-desc">Выберите внешний вид приложения</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="theme-selector">
-                        <div class="theme-option active" data-theme="dark">
-                            <div class="theme-preview dark-preview"></div>
-                            <span>Тёмная</span>
-                        </div>
-                        <div class="theme-option" data-theme="light">
-                            <div class="theme-preview light-preview"></div>
-                            <span>Светлая</span>
-                        </div>
-                        <div class="theme-option" data-theme="pelican">
-                            <div class="theme-preview pelican-preview"></div>
-                            <span>Пеликан</span>
-                        </div>
-                        <div class="theme-option" data-theme="auto">
-                            <div class="theme-preview auto-preview"></div>
-                            <span>Авто</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="settings-card" onclick="makeCall1()">
-                    <div class="setting-row clickable">
-                        <div class="setting-info">
-                            <div class="setting-icon">📞</div>
-                            <div>
-                                <div class="setting-title">Поддержка</div>
-                                <div class="setting-desc">Позвонить в студию</div>
-                            </div>
-                        </div>
-                        <span class="setting-arrow">›</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Info Section -->
-            <section id="info" class="section">
-                <div class="card">
-                    <div class="card-header">
-                        <div class="card-icon">🦩</div>
-                        <div>
-                            <div class="card-title">Флоат студия Pelican</div>
-                            <div class="card-subtitle">Место живительной силы в центре Казани</div>
-                        </div>
-                    </div>
-                    <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
-                        Новый способ психоэмоционального и физического расслабления в капсуле сенсорной депривации Dreampod. 
-                        Оздоровительные процедуры на системе сухого флоатинга Nuvola.
-                    </p>
-                </div>
-
-                <div class="section-title">Контакты</div>
-
-                <div class="info-card" onclick="makeCall1()">
-                    <div class="info-icon">📞</div>
-                    <div class="info-content">
-                        <div class="info-title">Позвонить</div>
-                        <div class="info-subtitle">+7 960 089-51-73</div>
-                    </div>
-                    <span class="info-arrow">›</span>
-                </div>
-
-                <div class="info-card" onclick="makeCall2()">
-                    <div class="info-icon">📞</div>
-                    <div class="info-content">
-                        <div class="info-title">Позвонить</div>
-                        <div class="info-subtitle">+7 917 268-33-83</div>
-                    </div>
-                    <span class="info-arrow">›</span>
-                </div>
-
-                <div class="info-card" onclick="openMaps()">
+            </div>
+            
+            <div class="history-tabs">
+                <div class="history-tab active" data-history="upcoming">Предстоящие</div>
+                <div class="history-tab" data-history="past">История</div>
+            </div>
+            
+            <div class="bookings-list" id="bookingsList">
+                <!-- Bookings will be loaded here -->
+            </div>
+        </section>
+        
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="about-hero">
+                <div class="about-emoji">🧘‍♀️</div>
+                <div class="about-title">Pelican Float Studio</div>
+                <div class="about-subtitle">Пространство для глубокой релаксации и восстановления в самом сердце города</div>
+            </div>
+            
+            <div class="info-cards">
+                <div class="info-card" onclick="openMap()">
                     <div class="info-icon">📍</div>
                     <div class="info-content">
-                        <div class="info-title">Адрес</div>
-                        <div class="info-subtitle">Казань, Большая красная ул., 8</div>
+                        <div class="info-label">Адрес</div>
+                        <div class="info-value">ул. Примерная, 123</div>
                     </div>
-                    <span class="info-arrow">›</span>
+                    <div class="info-arrow">→</div>
                 </div>
-
-                <div class="section-title" style="margin-top: 24px;">Польза флоатинга</div>
-
-                <div class="benefits">
-                    <div class="benefit">
-                        <div class="benefit-icon">🧘</div>
-                        <div class="benefit-title">Релаксация</div>
-                        <div class="benefit-desc">Глубокое расслабление</div>
+                <div class="info-card" onclick="callPhone()">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <div class="info-label">Телефон</div>
+                        <div class="info-value">+7 (999) 123-45-67</div>
                     </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">🧠</div>
-                        <div class="benefit-title">Ясность ума</div>
-                        <div class="benefit-desc">Снижение стресса</div>
-                    </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">💪</div>
-                        <div class="benefit-title">Восстановление</div>
-                        <div class="benefit-desc">Регенерация тела</div>
-                    </div>
-                    <div class="benefit">
-                        <div class="benefit-icon">😴</div>
-                        <div class="benefit-title">Здоровый сон</div>
-                        <div class="benefit-desc">Нормализация</div>
+                    <div class="info-arrow">→</div>
+                </div>
+                <div class="info-card">
+                    <div class="info-icon">🕐</div>
+                    <div class="info-content">
+                        <div class="info-label">Режим работы</div>
+                        <div class="info-value">Ежедневно 10:00 – 22:00</div>
                     </div>
                 </div>
-            </section>
-        </main>
-
-        <!-- Bottom Button -->
-        <div class="bottom-bar" id="bottomBar">
-            <button class="btn-primary" id="mainBtn" disabled onclick="handleMainAction()">
-                <span id="btnText">Выберите услугу</span>
-            </button>
-        </div>
-    </div>
-
-    <!-- Success Modal -->
-    <div class="modal-overlay" id="successModal">
-        <div class="modal">
-            <div class="modal-icon" id="modalIcon">✓</div>
-            <div class="modal-title" id="modalTitle">Готово!</div>
-            <div class="modal-text" id="modalText"></div>
-            <div class="modal-details" id="modalDetails"></div>
-            <button class="modal-btn" onclick="closeModal()">Отлично!</button>
-        </div>
-    </div>
-
-    <!-- Cancel Confirmation Modal -->
-    <div class="modal-overlay" id="cancelModal">
-        <div class="modal">
-            <div class="modal-icon error">⚠️</div>
-            <div class="modal-title">Отменить запись?</div>
-            <div class="modal-text" id="cancelModalText">Вы уверены, что хотите отменить эту запись?</div>
-            <div class="modal-actions">
-                <button class="modal-btn-secondary" onclick="closeCancelModal()">Нет</button>
-                <button class="modal-btn-danger" id="confirmCancelBtn">Отменить</button>
+                <div class="info-card" onclick="openInstagram()">
+                    <div class="info-icon">📸</div>
+                    <div class="info-content">
+                        <div class="info-label">Instagram</div>
+                        <div class="info-value">@pelican.float</div>
+                    </div>
+                    <div class="info-arrow">→</div>
+                </div>
             </div>
-        </div>
+        </section>
     </div>
-
-    <!-- Variant Selection Modal -->
-    <div class="variant-modal-overlay" id="variantOverlay"></div>
-    <div class="variant-modal" id="variantModal">
-        <div class="variant-modal-title" id="variantModalTitle">Выберите вариант</div>
-        <div class="variant-modal-desc" id="variantModalDesc"></div>
-        <div class="variant-options" id="variantOptions"></div>
-        <button class="variant-confirm-btn" id="variantConfirmBtn">Выбрать</button>
+    
+    <!-- Bottom Bar -->
+    <div class="bottom-bar">
+        <button class="main-button" id="mainButton" disabled>Выберите услугу</button>
     </div>
-
-    <!-- Toast -->
-    <div class="toast" id="toast"></div>
 
     <script>
-        // ============== CONFIG ==============
-        const WORKING_HOURS = { start: 10, end: 20 };
-        const API_URL = 'https://pelican-floating-camelot770.amvera.io';
-
-        // ============== TELEGRAM ==============
+        // Initialize Telegram WebApp
         const tg = window.Telegram?.WebApp;
-
-        // ============== STATE ==============
-        let currentUser = null;
-        let currentTab = 'booking';
-        let bookingsFilter = 'upcoming';
-
-        // Booking state
-        let selectedService = null;
-        let selectedServiceData = null;
-        let selectedVariant = null;
-        let selectedDate = null;
-        let selectedTime = null;
-
-        // Certificate state
-        let selectedCert = null;
-
-        // Services from API
-        let allServices = [];
-        let currentCategory = 'all';
-
-        // Slots data from API
-        let slotsCache = {};
-
-        // Хелпер для парсинга даты без проблем с часовым поясом
-        function parseLocalDate(dateStr) {
-            const [year, month, day] = dateStr.split('-').map(Number);
-            return new Date(year, month - 1, day);
+        if (tg) {
+            tg.ready();
+            tg.expand();
+            tg.enableClosingConfirmation();
         }
-
-        // Форматирование длительности
-        function formatDuration(minutes) {
-            if (minutes < 60) return `${minutes} мин`;
-            const hours = Math.floor(minutes / 60);
-            const mins = minutes % 60;
-            if (mins === 0) return `${hours} ч`;
-            return `${hours} ч ${mins} мин`;
-        }
-
-        // Категории
-        const categoryNames = {
-            'all': 'Все',
-            'floating': 'Флоатинг',
-            'couples': 'Для двоих',
-            'massage': 'Массаж',
-            'spa': 'SPA-ритуалы'
+        
+        // State
+        const state = {
+            activeTab: 'booking',
+            selectedService: null,
+            selectedDate: null,
+            selectedTime: null,
+            services: [],
+            timeSlots: []
         };
-
-        // Fallback services (если API недоступен)
-        const fallbackServices = [
-            { code: 'float-capsule', name: 'Флоатинг в капсуле DREAMPOD', price: 2900, duration: 45, category: 'floating', has_variants: 1, variants: [{duration: 45, price: 2900, label: '45 минут'}, {duration: 60, price: 3500, label: '60 минут'}, {duration: 90, price: 4800, label: '90 минут'}], description: 'Самый эффективный метод глубочайшего расслабления и восстановления.' }
+        
+        // Sample Services Data
+        const sampleServices = [
+            {
+                id: 1,
+                name: 'Флоатинг в капсуле DREAMPOD',
+                category: 'float',
+                duration: 60,
+                price: 2900,
+                description: 'Невесомость и полное расслабление',
+                icon: '🌊',
+                tag: 'Популярное'
+            },
+            {
+                id: 2,
+                name: 'Флоатинг 120 минут',
+                category: 'float',
+                duration: 120,
+                price: 3800,
+                description: 'Глубокий терапевтический эффект',
+                icon: '✨',
+                tag: 'Глубокий'
+            },
+            {
+                id: 3,
+                name: 'Романтический флоатинг',
+                category: 'couple',
+                duration: 90,
+                price: 5500,
+                description: 'Для двоих в одной комнате',
+                icon: '💕'
+            },
+            {
+                id: 4,
+                name: 'Комплекс: флоатинг + массаж',
+                category: 'couple',
+                duration: 150,
+                price: 7500,
+                description: 'Идеальное сочетание для релакса',
+                icon: '🌸',
+                tag: 'VIP'
+            },
+            {
+                id: 5,
+                name: 'Релакс-массаж',
+                category: 'massage',
+                duration: 60,
+                price: 3000,
+                description: 'Снятие напряжения и стресса',
+                icon: '🙌'
+            },
+            {
+                id: 6,
+                name: 'Нейроседативный массаж',
+                category: 'massage',
+                duration: 90,
+                price: 4500,
+                description: 'Глубокое расслабление нервной системы',
+                icon: '🧠'
+            },
+            {
+                id: 7,
+                name: 'Аудио медитация в капсуле',
+                category: 'float',
+                duration: 45,
+                price: 2000,
+                description: 'Погружение с аудиопрограммой',
+                icon: '🎧'
+            }
         ];
-
-        // Номинальные сертификаты
-        const nominalCertificates = {
-            'nominal-2000': { name: 'Сертификат на 2 000 ₽', price: 2000 },
-            'nominal-3000': { name: 'Сертификат на 3 000 ₽', price: 3000 },
-            'nominal-5000': { name: 'Сертификат на 5 000 ₽', price: 5000 },
-            'nominal-10000': { name: 'Сертификат на 10 000 ₽', price: 10000 },
-            'nominal-20000': { name: 'Сертификат на 20 000 ₽', price: 20000 }
-        };
-
-        // Для обратной совместимости
-        const certificates = nominalCertificates;
-
-        // Тип сертификата: 'nominal' или 'service'
-        let certType = 'nominal';
-        let selectedServiceCert = null;
-
-        // User bookings (loaded from API or local)
-        let userBookings = [];
-
-        // ============== API HELPERS ==============
-        async function apiCall(endpoint, options = {}) {
-            if (!API_URL) {
-                // Fallback to local data
-                return null;
-            }
-            
-            try {
-                const response = await fetch(`${API_URL}${endpoint}`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                        ...options.headers
-                    },
-                    ...options
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`API error: ${response.status}`);
-                }
-                
-                return await response.json();
-            } catch (error) {
-                console.error('API call failed:', error);
-                return null;
-            }
-        }
-
-        async function loadSlotsForDate(dateStr) {
-            console.log('📅 loadSlotsForDate:', dateStr);
-            
-            // Check cache first
-            if (slotsCache[dateStr]) {
-                console.log('📦 Using cached slots');
-                return slotsCache[dateStr];
-            }
-            
-            // Try to load from API
-            console.log('🌐 Fetching from API:', `${API_URL}/api/slots/${dateStr}`);
-            const data = await apiCall(`/api/slots/${dateStr}`);
-            console.log('📨 API response:', data);
-            
-            if (data && data.slots) {
-                console.log('✅ Got', data.slots.length, 'slots from API');
-                slotsCache[dateStr] = data.slots;
-                return data.slots;
-            }
-            
-            // Fallback: generate local slots
-            console.log('⚠️ API failed, generating local slots');
-            const slots = [];
-            const now = new Date();
-            const todayStr = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
-            const isToday = dateStr === todayStr;
-            
-            for (let hour = WORKING_HOURS.start; hour < WORKING_HOURS.end; hour++) {
-                for (let min of [0, 30]) {
-                    const timeStr = `${hour.toString().padStart(2, '0')}:${min.toString().padStart(2, '0')}`;
-                    
-                    let status = 'available';
-                    if (isToday) {
-                        const slotTime = new Date();
-                        slotTime.setHours(hour, min, 0);
-                        if (slotTime <= now) {
-                            status = 'past';
-                        }
-                    }
-                    
-                    slots.push({ time: timeStr, status });
-                }
-            }
-            
-            slotsCache[dateStr] = slots;
-            return slots;
-        }
-
-        async function loadUserBookings() {
-            if (currentUser?.id && API_URL) {
-                const data = await apiCall(`/api/bookings/${currentUser.id}`);
-                if (data) {
-                    userBookings = data;
-                }
-            } else {
-                // Demo data
-                const now = new Date();
-                const tomorrow = new Date(now);
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                const tomorrowStr = `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String(tomorrow.getDate()).padStart(2, '0')}`;
-                
-                userBookings = [
-                    {
-                        id: 'PEL20240115120000',
-                        service_name: 'Флоатинг 90 минут',
-                        price: 3200,
-                        date: tomorrowStr,
-                        time: '14:00',
-                        status: 'confirmed'
-                    }
-                ];
-            }
-            
-            updateProfileStats();
-            renderBookings();
-        }
-
-        async function cancelBookingAPI(bookingId) {
-            if (API_URL && currentUser?.id) {
-                const result = await apiCall(
-                    `/api/bookings/${bookingId}?telegram_user_id=${currentUser.id}`,
-                    { method: 'DELETE' }
-                );
-                return result?.success;
-            }
-            return true; // Fallback
-        }
-
-        // ============== INIT ==============
-        document.addEventListener('DOMContentLoaded', () => {
-            // Инициализируем тему сразу
-            initTheme();
-            
-            if (tg) {
-                tg.expand();
-                tg.ready();
-                applyTelegramTheme();
-            }
-
-            // Check auth
-            checkAuth();
-
-            // Init event listeners
-            initNavigation();
-            initCategoryTabs();  // Инициализируем табы категорий
-            initCertificateCards();
-            initBookingsTabs();
-            generateDates();
-        });
-
-        function applyTelegramTheme() {
-            if (tg?.themeParams) {
-                const params = tg.themeParams;
-                if (params.bg_color) {
-                    document.documentElement.style.setProperty('--bg-primary', params.bg_color);
-                }
-                if (params.secondary_bg_color) {
-                    document.documentElement.style.setProperty('--bg-secondary', params.secondary_bg_color);
-                }
-            }
-        }
-
-        // ============== AUTH ==============
-        function checkAuth() {
-            // Проверяем, есть ли данные пользователя в Telegram
-            if (tg?.initDataUnsafe?.user) {
-                const user = tg.initDataUnsafe.user;
-                
-                // Проверяем, есть ли сохранённый телефон
-                const savedPhone = localStorage.getItem('user_phone');
-                
-                if (savedPhone) {
-                    currentUser = {
-                        id: user.id,
-                        firstName: user.first_name,
-                        lastName: user.last_name || '',
-                        username: user.username,
-                        phone: savedPhone
-                    };
-                    showMainApp();
-                } else {
-                    // Показываем экран авторизации
-                    showAuthScreen();
-                }
-            } else {
-                // Для тестирования без Telegram
-                const savedPhone = localStorage.getItem('user_phone');
-                if (savedPhone) {
-                    currentUser = {
-                        id: 123456,
-                        firstName: 'Тестовый',
-                        lastName: 'Пользователь',
-                        phone: savedPhone
-                    };
-                    showMainApp();
-                } else {
-                    showAuthScreen();
-                }
-            }
-        }
-
-        function showAuthScreen() {
-            document.getElementById('authScreen').classList.remove('hidden');
-            document.getElementById('mainApp').style.display = 'none';
-        }
-
-        function showMainApp() {
-            document.getElementById('authScreen').classList.add('hidden');
-            document.getElementById('mainApp').style.display = 'block';
-            updateProfile();
-            loadUserBookings();
-            loadServices();  // Загружаем услуги из API
-        }
-
-        function requestContact() {
-            if (tg?.requestContact) {
-                // Запрашиваем контакт через Telegram
-                tg.requestContact((success, event) => {
-                    if (success) {
-                        // Получаем номер телефона
-                        const phone = event.responseUnsafe?.contact?.phone_number;
-                        if (phone) {
-                            saveUserPhone(phone);
-                        }
-                    } else {
-                        // Пользователь отказался — предлагаем ввести вручную
-                        showManualPhoneInput();
-                    }
-                });
-            } else {
-                // Fallback для тестирования
-                showManualPhoneInput();
-            }
-        }
-
-        function showManualPhoneInput() {
-            const phone = prompt('Введите ваш номер телефона:', '+7');
-            if (phone && phone.length >= 10) {
-                saveUserPhone(phone);
-            }
-        }
-
-        function saveUserPhone(phone) {
-            localStorage.setItem('user_phone', phone);
-            
-            const user = tg?.initDataUnsafe?.user || { id: 123456, first_name: 'Пользователь' };
-            
-            currentUser = {
-                id: user.id,
-                firstName: user.first_name,
-                lastName: user.last_name || '',
-                username: user.username,
-                phone: phone
-            };
-
-            // Отправляем данные в бота
-            if (tg?.sendData) {
-                tg.sendData(JSON.stringify({
-                    action: 'register',
-                    phone: phone,
-                    userId: user.id,
-                    firstName: user.first_name,
-                    lastName: user.last_name,
-                    username: user.username
-                }));
-            }
-
-            showMainApp();
-            showToast('Добро пожаловать! 👋');
-        }
-
-        // ============== NAVIGATION ==============
-        function initNavigation() {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    switchTab(item.dataset.tab);
-                });
-            });
-        }
-
-        function switchTab(tab) {
-            currentTab = tab;
-
-            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
-
-            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-            document.getElementById(tab).classList.add('active');
-
-            updateMainButton();
-            haptic('selection');
-        }
-
-        // ============== SERVICES ==============
-        // ============== SERVICES LOADING ==============
-        async function loadServices() {
-            try {
-                const data = await apiCall('/api/services');
-                if (data && data.services) {
-                    allServices = data.services;
-                    console.log('✅ Services loaded:', allServices.length);
-                } else {
-                    allServices = fallbackServices;
-                }
-            } catch (error) {
-                console.error('Failed to load services:', error);
-                allServices = fallbackServices;
-            }
-            renderServices();
-        }
-
-        function renderServices() {
-            const container = document.getElementById('servicesList');
-            
-            // Фильтруем по категории
-            let filtered = allServices;
-            if (currentCategory !== 'all') {
-                filtered = allServices.filter(s => s.category === currentCategory);
-            }
-            
-            if (filtered.length === 0) {
-                container.innerHTML = `
-                    <div class="empty-category">
-                        <div class="empty-category-icon">🚧</div>
-                        <div>Услуги в этой категории скоро появятся</div>
-                    </div>
-                `;
-                return;
-            }
-            
-            container.innerHTML = filtered.map(service => {
-                const hasVariants = service.has_variants && service.variants && service.variants.length > 0;
-                const priceText = hasVariants 
-                    ? `от ${service.variants[0].price.toLocaleString()} ₽`
-                    : `${service.price.toLocaleString()} ₽`;
-                const priceClass = hasVariants ? 'has-variants' : '';
-                
-                return `
-                    <div class="service-card" 
-                         data-service="${service.code}" 
-                         data-price="${service.price}" 
-                         data-duration="${service.duration}"
-                         data-has-variants="${hasVariants ? '1' : '0'}">
-                        <div class="service-top">
-                            <div class="service-info">
-                                <div class="service-name">${service.name}</div>
-                                <div class="service-duration">⏱ ${formatDuration(service.duration)}${hasVariants ? ' • выбор варианта' : ''}</div>
-                            </div>
-                            <div class="service-price ${priceClass}">${priceText}</div>
-                        </div>
-                    </div>
-                `;
-            }).join('');
-            
-            initServiceCards();
-        }
-
-        function initCategoryTabs() {
-            document.querySelectorAll('.category-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    currentCategory = tab.dataset.category;
-                    renderServices();
-                    haptic('light');
-                });
-            });
-        }
-
-        function initServiceCards() {
-            document.querySelectorAll('.service-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const serviceCode = card.dataset.service;
-                    const hasVariants = card.dataset.hasVariants === '1';
-                    
-                    // Находим данные услуги
-                    selectedServiceData = allServices.find(s => s.code === serviceCode);
-                    
-                    if (hasVariants && selectedServiceData.variants) {
-                        // Открываем модальное окно выбора варианта
-                        showVariantModal(selectedServiceData);
-                    } else {
-                        // Выбираем услугу напрямую
-                        selectService(serviceCode, selectedServiceData.price, selectedServiceData.duration);
-                        document.querySelectorAll('.service-card').forEach(c => c.classList.remove('selected'));
-                        card.classList.add('selected');
-                    }
-                    
-                    haptic('light');
-                });
-            });
-        }
-
-        function showVariantModal(service) {
-            const modal = document.getElementById('variantModal');
-            const overlay = document.getElementById('variantOverlay');
-            const title = document.getElementById('variantModalTitle');
-            const desc = document.getElementById('variantModalDesc');
-            const options = document.getElementById('variantOptions');
-            
-            title.textContent = service.name;
-            desc.textContent = service.description || '';
-            
-            selectedVariant = null;
-            
-            options.innerHTML = service.variants.map((v, idx) => `
-                <div class="variant-option" data-index="${idx}" data-duration="${v.duration}" data-price="${v.price}">
-                    <div class="variant-label">${v.label}</div>
-                    <div class="variant-price">${v.price.toLocaleString()} ₽</div>
-                </div>
-            `).join('');
-            
-            // Обработчики для опций
-            options.querySelectorAll('.variant-option').forEach(opt => {
-                opt.addEventListener('click', () => {
-                    options.querySelectorAll('.variant-option').forEach(o => o.classList.remove('selected'));
-                    opt.classList.add('selected');
-                    selectedVariant = {
-                        index: parseInt(opt.dataset.index),
-                        duration: parseInt(opt.dataset.duration),
-                        price: parseInt(opt.dataset.price)
-                    };
-                    haptic('selection');
-                });
-            });
-            
-            modal.classList.add('show');
-            overlay.classList.add('show');
-            
-            // Закрытие по overlay
-            overlay.onclick = () => closeVariantModal();
-        }
-
-        function closeVariantModal() {
-            document.getElementById('variantModal').classList.remove('show');
-            document.getElementById('variantOverlay').classList.remove('show');
-        }
-
-        // Обработчик подтверждения выбора варианта
-        document.getElementById('variantConfirmBtn').addEventListener('click', () => {
-            if (!selectedVariant || !selectedServiceData) {
-                showToast('Выберите вариант');
-                return;
-            }
-            
-            selectService(
-                selectedServiceData.code, 
-                selectedVariant.price, 
-                selectedVariant.duration
-            );
-            
-            closeVariantModal();
-            
-            // Выделяем карточку
-            document.querySelectorAll('.service-card').forEach(c => {
-                if (c.dataset.service === selectedServiceData.code) {
-                    c.classList.add('selected');
-                } else {
-                    c.classList.remove('selected');
-                }
-            });
-        });
-
-        function selectService(code, price, duration) {
-            selectedService = code;
-            selectedServiceData = allServices.find(s => s.code === code) || { name: code, price, duration };
-            selectedServiceData.selectedPrice = price;
-            selectedServiceData.selectedDuration = duration;
-            
-            selectedDate = null;
-            selectedTime = null;
-
-            document.getElementById('dateCard').style.display = 'block';
-            document.getElementById('timeCard').style.display = 'none';
-            document.getElementById('bookingSummary').style.display = 'none';
-
-            document.querySelectorAll('.date-item').forEach(d => d.classList.remove('selected'));
-
-            updateMainButton();
-        }
-
-        // ============== DATES ==============
+        
+        // Generate dates for next 14 days
         function generateDates() {
-            const picker = document.getElementById('datePicker');
+            const dates = [];
             const days = ['ВС', 'ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ'];
             const months = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек'];
-
+            
             for (let i = 0; i < 14; i++) {
                 const date = new Date();
                 date.setDate(date.getDate() + i);
-                
-                // Используем локальную дату, а не UTC!
-                const year = date.getFullYear();
-                const month = String(date.getMonth() + 1).padStart(2, '0');
-                const day = String(date.getDate()).padStart(2, '0');
-                const dateStr = `${year}-${month}-${day}`;
-
-                const item = document.createElement('div');
-                item.className = 'date-item';
-                item.dataset.date = dateStr;
-                item.innerHTML = `
-                    <div class="date-day">${days[date.getDay()]}</div>
-                    <div class="date-num">${date.getDate()}</div>
-                    <div class="date-month">${months[date.getMonth()]}</div>
-                `;
-
-                item.addEventListener('click', () => selectDate(dateStr, item));
-                picker.appendChild(item);
-            }
-        }
-
-        function selectDate(dateStr, item) {
-            console.log('📆 selectDate clicked:', dateStr);
-            document.querySelectorAll('.date-item').forEach(d => d.classList.remove('selected'));
-            item.classList.add('selected');
-
-            selectedDate = dateStr;
-            selectedTime = null;
-
-            const date = parseLocalDate(dateStr);
-            document.getElementById('selectedDateText').textContent = 
-                date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'long' });
-
-            generateTimeSlots(dateStr); // Now async
-            document.getElementById('timeCard').style.display = 'block';
-            document.getElementById('bookingSummary').style.display = 'none';
-
-            updateMainButton();
-            haptic('selection');
-            console.log('✅ selectDate completed');
-        }
-
-        // ============== TIME SLOTS ==============
-        async function generateTimeSlots(dateStr) {
-            const grid = document.getElementById('timeGrid');
-            const noSlots = document.getElementById('noSlots');
-            
-            // Show loading
-            grid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 20px; color: var(--text-secondary);">Загрузка слотов...</div>';
-            grid.style.display = 'grid';
-            noSlots.style.display = 'none';
-            
-            // Load slots from API or cache
-            const slots = await loadSlotsForDate(dateStr);
-            
-            // Получаем длительность выбранной услуги
-            const duration = selectedServiceData?.selectedDuration || selectedServiceData?.duration || 60;
-            const slotsNeeded = Math.ceil(duration / 30);
-            
-            grid.innerHTML = '';
-            
-            let hasAvailable = false;
-            
-            for (let i = 0; i < slots.length; i++) {
-                const slot = slots[i];
-                const el = document.createElement('div');
-                el.className = 'time-slot';
-                el.textContent = slot.time;
-                
-                // Проверяем доступность всех необходимых слотов
-                let canBook = true;
-                if (slot.status !== 'available') {
-                    canBook = false;
-                } else if (slotsNeeded > 1) {
-                    // Проверяем следующие слоты
-                    for (let j = 1; j < slotsNeeded; j++) {
-                        const nextSlot = slots[i + j];
-                        if (!nextSlot || nextSlot.status !== 'available') {
-                            canBook = false;
-                            break;
-                        }
-                    }
-                }
-                
-                if (canBook) {
-                    hasAvailable = true;
-                    el.addEventListener('click', () => selectTime(slot.time, el));
-                } else {
-                    el.classList.add('disabled');
-                    if (slot.status === 'blocked') {
-                        el.title = 'Заблокировано';
-                    } else if (slot.status === 'booked') {
-                        el.title = 'Занято';
-                    } else if (slotsNeeded > 1) {
-                        el.title = `Недостаточно времени (нужно ${slotsNeeded} слотов)`;
-                    }
-                }
-                
-                grid.appendChild(el);
-            }
-            
-            if (!hasAvailable) {
-                noSlots.style.display = 'block';
-                grid.style.display = 'none';
-            } else {
-                noSlots.style.display = 'none';
-                grid.style.display = 'grid';
-            }
-        }
-
-        function selectTime(time, slot) {
-            document.querySelectorAll('.time-slot').forEach(s => s.classList.remove('selected'));
-            slot.classList.add('selected');
-
-            selectedTime = time;
-            updateBookingSummary();
-            updateMainButton();
-            haptic('light');
-        }
-
-        function updateBookingSummary() {
-            const summary = document.getElementById('bookingSummary');
-
-            if (selectedService && selectedDate && selectedTime && selectedServiceData) {
-                summary.style.display = 'block';
-
-                const serviceName = selectedServiceData.name;
-                const price = selectedServiceData.selectedPrice || selectedServiceData.price;
-                const duration = selectedServiceData.selectedDuration || selectedServiceData.duration;
-                
-                const date = parseLocalDate(selectedDate);
-                const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short' });
-
-                document.getElementById('sumService').textContent = `${serviceName} (${formatDuration(duration)})`;
-                document.getElementById('sumDate').textContent = dateStr;
-                document.getElementById('sumTime').textContent = selectedTime;
-                document.getElementById('sumTotal').textContent = price.toLocaleString() + ' ₽';
-            }
-        }
-
-        // ============== CERTIFICATES ==============
-        function initCertificateCards() {
-            // Табы типа сертификата
-            document.querySelectorAll('.cert-type-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.cert-type-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    certType = tab.dataset.certType;
-                    
-                    document.getElementById('nominalCerts').style.display = certType === 'nominal' ? 'flex' : 'none';
-                    document.getElementById('serviceCerts').style.display = certType === 'service' ? 'block' : 'none';
-                    
-                    // Сбрасываем выбор при переключении
-                    selectedCert = null;
-                    selectedServiceCert = null;
-                    document.querySelectorAll('.cert-card').forEach(c => c.classList.remove('selected'));
-                    document.querySelectorAll('.cert-service-item').forEach(c => c.classList.remove('selected'));
-                    document.getElementById('certForm').style.display = 'none';
-                    document.getElementById('certSummary').style.display = 'none';
-                    updateMainButton();
-                    
-                    if (certType === 'service') {
-                        renderServiceCertificates();
-                    }
-                    haptic('light');
-                });
-            });
-
-            // Номинальные сертификаты
-            document.querySelectorAll('.cert-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    document.querySelectorAll('.cert-card').forEach(c => c.classList.remove('selected'));
-                    card.classList.add('selected');
-
-                    selectedCert = card.dataset.cert;
-                    selectedServiceCert = null;
-                    document.getElementById('certForm').style.display = 'block';
-                    updateCertSummary();
-                    updateMainButton();
-                    haptic('light');
-                    
-                    // Скроллим к форме
-                    setTimeout(() => {
-                        document.getElementById('certForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 100);
-                });
-            });
-
-            // Form listeners
-            document.getElementById('certRecipient').addEventListener('input', updateCertSummary);
-            document.getElementById('certPhone').addEventListener('input', updateMainButton);
-
-            // Скрытие клавиатуры при Enter
-            const certInputs = ['certRecipient', 'certPhone', 'certTelegram', 'certMessage'];
-            certInputs.forEach(id => {
-                const input = document.getElementById(id);
-                if (input) {
-                    input.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter') {
-                            e.preventDefault();
-                            input.blur();
-                        }
-                    });
-                }
-            });
-        }
-
-        // Глобальный обработчик для скрытия клавиатуры при тапе вне инпутов
-        document.addEventListener('click', (e) => {
-            if (!e.target.matches('input, textarea')) {
-                document.activeElement?.blur();
-            }
-        });
-
-        function renderServiceCertificates() {
-            const container = document.getElementById('certServicesList');
-            container.innerHTML = allServices.map(service => {
-                const price = service.has_variants && service.variants?.length > 0 
-                    ? service.variants[0].price 
-                    : service.price;
-                return `
-                    <div class="cert-service-item" data-service="${service.code}" data-price="${price}" data-name="${service.name}">
-                        <div class="cert-service-name">${service.name}</div>
-                        <div class="cert-service-price">${price.toLocaleString()} ₽</div>
-                    </div>
-                `;
-            }).join('');
-
-            // Добавляем обработчики
-            container.querySelectorAll('.cert-service-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    container.querySelectorAll('.cert-service-item').forEach(i => i.classList.remove('selected'));
-                    item.classList.add('selected');
-                    
-                    selectedServiceCert = {
-                        code: item.dataset.service,
-                        name: item.dataset.name,
-                        price: parseInt(item.dataset.price)
-                    };
-                    selectedCert = null;
-                    
-                    document.getElementById('certForm').style.display = 'block';
-                    updateCertSummary();
-                    updateMainButton();
-                    haptic('light');
-                    
-                    // Скроллим к форме
-                    setTimeout(() => {
-                        document.getElementById('certForm').scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    }, 100);
-                });
-            });
-        }
-
-        function updateCertSummary() {
-            const summary = document.getElementById('certSummary');
-            const recipient = document.getElementById('certRecipient').value.trim() || '—';
-            
-            if (selectedCert && nominalCertificates[selectedCert]) {
-                summary.style.display = 'block';
-                const cert = nominalCertificates[selectedCert];
-                document.getElementById('certSumName').textContent = cert.name;
-                document.getElementById('certSumRecipient').textContent = recipient;
-                document.getElementById('certSumTotal').textContent = cert.price.toLocaleString() + ' ₽';
-            } else if (selectedServiceCert) {
-                summary.style.display = 'block';
-                document.getElementById('certSumName').textContent = `Сертификат: ${selectedServiceCert.name}`;
-                document.getElementById('certSumRecipient').textContent = recipient;
-                document.getElementById('certSumTotal').textContent = selectedServiceCert.price.toLocaleString() + ' ₽';
-            } else {
-                summary.style.display = 'none';
-            }
-        }
-
-        // ============== THEME ==============
-        function initTheme() {
-            // Загружаем сохранённую тему
-            const savedTheme = localStorage.getItem('pelican-theme') || 'dark';
-            applyTheme(savedTheme);
-            
-            // Отмечаем активную тему
-            document.querySelectorAll('.theme-option').forEach(opt => {
-                opt.classList.toggle('active', opt.dataset.theme === savedTheme);
-            });
-            
-            // Обработчики выбора темы
-            document.querySelectorAll('.theme-option').forEach(opt => {
-                opt.addEventListener('click', () => {
-                    const theme = opt.dataset.theme;
-                    document.querySelectorAll('.theme-option').forEach(o => o.classList.remove('active'));
-                    opt.classList.add('active');
-                    applyTheme(theme);
-                    localStorage.setItem('pelican-theme', theme);
-                    haptic('light');
-                });
-            });
-        }
-
-        function applyTheme(theme) {
-            // Убираем все классы тем
-            document.body.classList.remove('light-theme', 'pelican-theme');
-            document.documentElement.removeAttribute('data-theme');
-            
-            if (theme === 'light') {
-                document.body.classList.add('light-theme');
-            } else if (theme === 'pelican') {
-                document.body.classList.add('pelican-theme');
-                document.documentElement.setAttribute('data-theme', 'pelican');
-            } else if (theme === 'dark') {
-                // Тёмная тема по умолчанию - ничего не добавляем
-            } else if (theme === 'auto') {
-                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                if (!prefersDark) {
-                    document.body.classList.add('light-theme');
-                }
-            }
-        }
-
-        // ============== PROFILE ==============
-        function updateProfile() {
-            if (!currentUser) return;
-
-            document.getElementById('profileName').textContent = 
-                `${currentUser.firstName} ${currentUser.lastName}`.trim();
-            document.getElementById('profilePhone').textContent = currentUser.phone;
-
-            // Инициалы для аватара
-            const initials = (currentUser.firstName[0] || '') + (currentUser.lastName[0] || '');
-            document.getElementById('profileAvatar').textContent = initials || '👤';
-        }
-
-        function initBookingsTabs() {
-            document.querySelectorAll('.bookings-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.bookings-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    bookingsFilter = tab.dataset.filter;
-                    renderBookings();
-                });
-            });
-        }
-
-        function updateProfileStats() {
-            const upcoming = userBookings.filter(b => b.status === 'confirmed').length;
-            const completed = userBookings.filter(b => b.status === 'completed').length;
-
-            document.getElementById('statBookings').textContent = upcoming;
-            document.getElementById('statVisits').textContent = completed;
-        }
-
-        function renderBookings() {
-            const container = document.getElementById('bookingsList');
-            const empty = document.getElementById('emptyBookings');
-
-            const now = new Date();
-            let filtered = [];
-            
-            // Вспомогательная функция для получения полной даты+время записи
-            function getBookingDateTime(b) {
-                const date = parseLocalDate(b.date);
-                const [hours, minutes] = (b.time || '00:00').split(':').map(Number);
-                date.setHours(hours, minutes, 0, 0);
-                return date;
-            }
-
-            if (bookingsFilter === 'upcoming') {
-                // Предстоящие: дата+время >= сейчас И статус подтверждён
-                filtered = userBookings.filter(b => {
-                    const bookingDateTime = getBookingDateTime(b);
-                    return bookingDateTime >= now && b.status === 'confirmed';
-                });
-            } else {
-                // История: дата+время < сейчас ИЛИ статус не подтверждён (отменено и т.д.)
-                filtered = userBookings.filter(b => {
-                    const bookingDateTime = getBookingDateTime(b);
-                    return bookingDateTime < now || b.status !== 'confirmed';
+                dates.push({
+                    date: date,
+                    day: days[date.getDay()],
+                    num: date.getDate(),
+                    month: months[date.getMonth()]
                 });
             }
-
-            if (filtered.length === 0) {
-                container.innerHTML = '';
-                empty.style.display = 'block';
-                return;
-            }
-
-            empty.style.display = 'none';
-            container.innerHTML = filtered.map(b => {
-                const date = parseLocalDate(b.date);
-                const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', weekday: 'short' });
-                
-                // Используем функцию для получения полной даты+время
-                const bookingDateTime = getBookingDateTime(b);
-                
-                // Запись прошла только если дата+время записи меньше текущего времени
-                const isPast = bookingDateTime < now || b.status !== 'confirmed';
-                const serviceName = b.service_name || b.service || 'Услуга';
-
-                let statusClass = 'confirmed';
-                let statusText = '✓ Подтверждено';
-                if (b.status === 'cancelled' || b.status === 'cancelled_by_admin') {
-                    statusClass = 'cancelled';
-                    statusText = b.status === 'cancelled_by_admin' ? '✕ Отменено студией' : '✕ Отменено';
-                } else if (isPast) {
-                    statusClass = 'completed';
-                    statusText = '✓ Завершено';
-                }
-
-                return `
-                    <div class="booking-card ${isPast ? 'past' : ''}">
-                        <div class="booking-status ${statusClass}">${statusText}</div>
-                        <div class="booking-info">
-                            <div>
-                                <div class="booking-service">${serviceName}</div>
-                                <div class="booking-datetime">
-                                    <span>📅 ${dateStr}</span>
-                                    <span>🕐 ${b.time}</span>
-                                </div>
-                            </div>
-                            <div class="booking-price">${(b.price || 0).toLocaleString()} ₽</div>
-                        </div>
-                        ${b.status === 'confirmed' && !isPast ? `
-                            <div class="booking-actions">
-                                <button class="btn-cancel" onclick="showCancelModal('${b.id}')">
-                                    Отменить запись
-                                </button>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            }).join('');
-        }
-
-        // ============== CANCEL BOOKING ==============
-        let bookingToCancel = null;
-
-        function showCancelModal(bookingId) {
-            bookingToCancel = bookingId;
-            const booking = userBookings.find(b => b.id === bookingId);
-            
-            if (booking) {
-                const date = parseLocalDate(booking.date);
-                const dateStr = date.toLocaleDateString('ru-RU', { day: 'numeric', month: 'long' });
-                document.getElementById('cancelModalText').textContent = 
-                    `${booking.service}, ${dateStr} в ${booking.time}`;
-            }
-
-            document.getElementById('cancelModal').classList.add('active');
-            document.getElementById('confirmCancelBtn').onclick = confirmCancelBooking;
-        }
-
-        function closeCancelModal() {
-            document.getElementById('cancelModal').classList.remove('active');
-            bookingToCancel = null;
-        }
-
-        async function confirmCancelBooking() {
-            if (!bookingToCancel) return;
-
-            // Call API if available
-            await cancelBookingAPI(bookingToCancel);
-
-            // Отправляем в бота
-            if (tg?.sendData) {
-                tg.sendData(JSON.stringify({
-                    action: 'cancel_booking',
-                    bookingId: bookingToCancel
-                }));
-            }
-
-            // Обновляем локально
-            const booking = userBookings.find(b => b.id === bookingToCancel);
-            if (booking) {
-                booking.status = 'cancelled';
-            }
-
-            // Clear slot cache for this date
-            if (booking?.date) {
-                delete slotsCache[booking.date];
-            }
-
-            closeCancelModal();
-            updateProfileStats();
-            renderBookings();
-            showToast('Запись отменена');
-            haptic('success');
-        }
-
-        // ============== MAIN BUTTON ==============
-        function updateMainButton() {
-            const btn = document.getElementById('mainBtn');
-            const text = document.getElementById('btnText');
-
-            btn.classList.remove('gold');
-            btn.disabled = true;
-
-            if (currentTab === 'booking') {
-                if (!selectedService) {
-                    text.textContent = 'Выберите услугу';
-                } else if (!selectedDate) {
-                    text.textContent = 'Выберите дату';
-                } else if (!selectedTime) {
-                    text.textContent = 'Выберите время';
-                } else {
-                    btn.disabled = false;
-                    text.textContent = 'Записаться • ' + services[selectedService].price.toLocaleString() + ' ₽';
-                }
-            } else if (currentTab === 'certificates') {
-                btn.classList.add('gold');
-                const hasCert = selectedCert || selectedServiceCert;
-                if (!hasCert) {
-                    text.textContent = 'Выберите сертификат';
-                } else {
-                    const recipient = document.getElementById('certRecipient').value.trim();
-                    const phone = document.getElementById('certPhone').value.trim();
-                    const price = selectedCert 
-                        ? nominalCertificates[selectedCert].price 
-                        : selectedServiceCert.price;
-                    if (recipient && phone) {
-                        btn.disabled = false;
-                        text.textContent = 'Купить • ' + price.toLocaleString() + ' ₽';
-                    } else {
-                        text.textContent = 'Заполните данные';
-                    }
-                }
-            } else if (currentTab === 'profile' || currentTab === 'info') {
-                btn.disabled = false;
-                text.textContent = 'Записаться';
-            }
-        }
-
-        function handleMainAction() {
-            if (currentTab === 'booking' && selectedService && selectedDate && selectedTime) {
-                confirmBooking();
-            } else if (currentTab === 'certificates' && (selectedCert || selectedServiceCert)) {
-                confirmCertificate();
-            } else {
-                switchTab('booking');
-            }
-        }
-
-        // ============== CONFIRMATIONS ==============
-        async function confirmBooking() {
-            const btn = document.getElementById('mainBtn');
-            btn.classList.add('loading');
-            btn.disabled = true;
-
-            const serviceName = selectedServiceData.name;
-            const price = selectedServiceData.selectedPrice || selectedServiceData.price;
-            const duration = selectedServiceData.selectedDuration || selectedServiceData.duration;
-            const date = parseLocalDate(selectedDate);
-
-            const bookingData = {
-                action: 'booking',
-                service: selectedService,
-                serviceName: serviceName + ` (${formatDuration(duration)})`,
-                price: price,
-                duration: duration,
-                date: selectedDate,
-                dateFormatted: date.toLocaleDateString('ru-RU'),
-                time: selectedTime,
-                clientName: `${currentUser.firstName} ${currentUser.lastName}`.trim(),
-                clientPhone: currentUser.phone,
-                telegramUserId: currentUser.id
-            };
-
-            // Сохраняем через API
-            let apiSuccess = false;
-            if (API_URL) {
-                try {
-                    const response = await fetch(`${API_URL}/api/bookings`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(bookingData)
-                    });
-                    const result = await response.json();
-                    if (response.ok && result.success) {
-                        apiSuccess = true;
-                        bookingData.bookingId = result.booking_id;
-                    }
-                } catch (e) {
-                    console.error('API booking failed:', e);
-                }
-            }
-
-            // Также отправляем в бота если доступен
-            if (tg?.sendData) {
-                tg.sendData(JSON.stringify(bookingData));
-            }
-
-            // Если API успешен - добавляем в локальный список
-            if (apiSuccess) {
-                userBookings.unshift({
-                    id: bookingData.bookingId || 'PEL' + Date.now(),
-                    service_name: serviceName,
-                    price: price,
-                    date: selectedDate,
-                    time: selectedTime,
-                    status: 'confirmed'
-                });
-            }
-
-            // Очищаем кэш слотов для этой даты
-            delete slotsCache[selectedDate];
-
-            btn.classList.remove('loading');
-            showSuccessModal('booking', bookingData);
-            updateProfileStats();
-        }
-
-        async function confirmCertificate() {
-            const btn = document.getElementById('mainBtn');
-            const phoneInput = document.getElementById('certPhone');
-            const phone = phoneInput.value.trim();
-            
-            // Проверка телефона
-            if (!phone || phone.length < 10) {
-                showToast('Введите телефон получателя', 'error');
-                return;
-            }
-            
-            btn.classList.add('loading');
-            btn.disabled = true;
-
-            // Определяем данные сертификата
-            let certName, certPrice, certCode;
-            if (selectedCert && nominalCertificates[selectedCert]) {
-                const cert = nominalCertificates[selectedCert];
-                certName = cert.name;
-                certPrice = cert.price;
-                certCode = selectedCert;
-            } else if (selectedServiceCert) {
-                certName = `Сертификат на услугу: ${selectedServiceCert.name}`;
-                certPrice = selectedServiceCert.price;
-                certCode = `service-${selectedServiceCert.code}`;
-            } else {
-                btn.classList.remove('loading');
-                btn.disabled = false;
-                return;
-            }
-
-            const certData = {
-                action: 'certificate',
-                certificate: certCode,
-                certificateName: certName,
-                price: certPrice,
-                recipientName: document.getElementById('certRecipient').value.trim(),
-                recipientPhone: phone,
-                recipientTelegram: document.getElementById('certTelegram').value.trim(),
-                message: document.getElementById('certMessage').value.trim(),
-                buyerPhone: currentUser.phone,
-                telegramUserId: currentUser.id
-            };
-
-            // Сначала отправляем через API
-            let apiSuccess = false;
-            if (API_URL) {
-                try {
-                    const response = await fetch(`${API_URL}/api/certificates`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(certData)
-                    });
-                    const result = await response.json();
-                    if (response.ok && result.success) {
-                        apiSuccess = true;
-                        certData.certId = result.cert_id;
-                    }
-                } catch (e) {
-                    console.error('API certificate failed:', e);
-                }
-            }
-
-            // Также отправляем в бота если доступен
-            if (tg?.sendData) {
-                tg.sendData(JSON.stringify(certData));
-            }
-            
-            // Показываем модалку
-            btn.classList.remove('loading');
-            showSuccessModal('certificate', certData);
-            
-            // Закрываем Mini App через 2 секунды
-            setTimeout(() => {
-                if (tg?.close) {
-                    tg.close();
-                }
-            }, 2000);
+            return dates;
         }
         
-        // Показать toast уведомление
-        function showToast(message, type = 'info') {
-            let toast = document.getElementById('toast');
-            if (!toast) {
-                toast = document.createElement('div');
-                toast.id = 'toast';
-                toast.style.cssText = `
-                    position: fixed;
-                    bottom: 100px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: ${type === 'error' ? '#ff5252' : '#333'};
-                    color: white;
-                    padding: 12px 24px;
-                    border-radius: 8px;
-                    z-index: 10000;
-                    opacity: 0;
-                    transition: opacity 0.3s;
-                `;
-                document.body.appendChild(toast);
+        // Generate time slots
+        function generateTimeSlots() {
+            const slots = [];
+            for (let h = 10; h <= 21; h++) {
+                slots.push(`${h}:00`);
+                if (h < 21) slots.push(`${h}:30`);
             }
-            toast.textContent = message;
-            toast.style.background = type === 'error' ? '#ff5252' : '#333';
-            toast.style.opacity = '1';
-            setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+            return slots;
         }
-
-        // ============== MODALS ==============
-        function showSuccessModal(type, data) {
-            const modal = document.getElementById('successModal');
-            const icon = document.getElementById('modalIcon');
-            const title = document.getElementById('modalTitle');
-            const text = document.getElementById('modalText');
-            const details = document.getElementById('modalDetails');
-
-            icon.classList.remove('gold', 'error');
-
-            if (type === 'booking') {
-                icon.textContent = '✓';
-                title.textContent = 'Запись подтверждена!';
-                text.textContent = 'Мы ждём вас в студии. Подтверждение придёт в чат.';
-                details.innerHTML = `
-                    <div class="modal-detail-row">
-                        <span>Услуга</span><span>${data.serviceName}</span>
+        
+        // Render services
+        function renderServices(category = 'all') {
+            const container = document.getElementById('servicesList');
+            const filtered = category === 'all' 
+                ? sampleServices 
+                : sampleServices.filter(s => s.category === category);
+            
+            container.innerHTML = filtered.map(service => `
+                <div class="service-card ${state.selectedService?.id === service.id ? 'selected' : ''}" 
+                     data-id="${service.id}"
+                     onclick="selectService(${service.id})">
+                    <div class="service-header">
+                        <div class="service-icon ${service.category}">${service.icon}</div>
+                        <div class="service-content">
+                            <div class="service-name">${service.name}</div>
+                            <div class="service-meta">
+                                <span class="service-duration">⏱ ${service.duration} мин</span>
+                                ${service.tag ? `<span class="service-tag">${service.tag}</span>` : ''}
+                            </div>
+                            <div class="service-description">${service.description}</div>
+                        </div>
+                        <div class="service-price">
+                            ${service.price.toLocaleString()} ₽
+                        </div>
                     </div>
-                    <div class="modal-detail-row">
-                        <span>Дата</span><span>${data.dateFormatted}</span>
-                    </div>
-                    <div class="modal-detail-row">
-                        <span>Время</span><span>${data.time}</span>
-                    </div>
-                    <div class="modal-detail-row">
-                        <span>Стоимость</span><span style="color: var(--accent-cyan)">${data.price.toLocaleString()} ₽</span>
-                    </div>
-                `;
-            } else {
-                icon.textContent = '🎁';
-                icon.classList.add('gold');
-                title.textContent = 'Заявка принята!';
-                text.textContent = 'Свяжитесь с нами для оплаты. После оплаты вам придёт код сертификата.';
-                details.innerHTML = `
-                    <div class="modal-detail-row">
-                        <span>Сертификат</span><span>${data.certificateName}</span>
-                    </div>
-                    <div class="modal-detail-row">
-                        <span>Получатель</span><span>${data.recipientName}</span>
-                    </div>
-                    <div class="modal-detail-row">
-                        <span>Телефон</span><span>${data.recipientPhone}</span>
-                    </div>
-                    ${data.recipientTelegram ? `<div class="modal-detail-row">
-                        <span>Telegram</span><span>${data.recipientTelegram}</span>
-                    </div>` : ''}
-                    <div class="modal-detail-row">
-                        <span>К оплате</span><span style="color: var(--accent-gold)">${data.price.toLocaleString()} ₽</span>
-                    </div>
-                `;
-            }
-
-            modal.classList.add('active');
-            haptic('success');
+                </div>
+            `).join('');
         }
-
-        function closeModal() {
-            document.getElementById('successModal').classList.remove('active');
-            resetBookingForm();
-            switchTab('profile');
-            renderBookings();
+        
+        // Render dates
+        function renderDates() {
+            const container = document.getElementById('dateScroll');
+            const dates = generateDates();
+            
+            container.innerHTML = dates.map((d, i) => `
+                <div class="date-item ${i === 0 && state.selectedDate === null ? '' : (state.selectedDate?.getTime() === d.date.getTime() ? 'selected' : '')}" 
+                     onclick="selectDate(${i})">
+                    <div class="date-day">${d.day}</div>
+                    <div class="date-num">${d.num}</div>
+                    <div class="date-month">${d.month}</div>
+                </div>
+            `).join('');
         }
-
-        function resetBookingForm() {
-            selectedService = null;
-            selectedDate = null;
-            selectedTime = null;
-            selectedCert = null;
-
-            document.querySelectorAll('.service-card, .cert-card, .date-item, .time-slot')
-                .forEach(el => el.classList.remove('selected'));
-
-            document.getElementById('dateCard').style.display = 'none';
-            document.getElementById('timeCard').style.display = 'none';
-            document.getElementById('bookingSummary').style.display = 'none';
-            document.getElementById('certForm').style.display = 'none';
-            document.getElementById('certSummary').style.display = 'none';
-
-            document.getElementById('certRecipient').value = '';
-            document.getElementById('certPhone').value = '';
-            document.getElementById('certTelegram').value = '';
-            document.getElementById('certMessage').value = '';
-
-            updateMainButton();
+        
+        // Render time slots
+        function renderTimeSlots() {
+            const container = document.getElementById('timeGrid');
+            const slots = generateTimeSlots();
+            const unavailable = [2, 5, 8, 11]; // Some random unavailable slots
+            
+            container.innerHTML = slots.map((time, i) => `
+                <div class="time-slot ${unavailable.includes(i) ? 'disabled' : ''} ${state.selectedTime === time ? 'selected' : ''}"
+                     onclick="${unavailable.includes(i) ? '' : `selectTime('${time}')`}">
+                    ${time}
+                </div>
+            `).join('');
         }
-
-        // ============== UTILITIES ==============
-        function haptic(type) {
+        
+        // Select service
+        function selectService(id) {
+            state.selectedService = sampleServices.find(s => s.id === id);
+            renderServices(document.querySelector('.category-pill.active').dataset.category);
+            
+            document.getElementById('dateSection').style.display = 'block';
+            renderDates();
+            
+            updateButton();
+            
+            // Haptic feedback
             if (tg?.HapticFeedback) {
-                switch(type) {
-                    case 'light': tg.HapticFeedback.impactOccurred('light'); break;
-                    case 'selection': tg.HapticFeedback.selectionChanged(); break;
-                    case 'success': tg.HapticFeedback.notificationOccurred('success'); break;
-                }
+                tg.HapticFeedback.selectionChanged();
             }
         }
-
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+        
+        // Select date
+        function selectDate(index) {
+            const dates = generateDates();
+            state.selectedDate = dates[index].date;
+            renderDates();
+            
+            document.getElementById('timeSection').style.display = 'block';
+            document.getElementById('selectedDateText').textContent = 
+                `${dates[index].day}, ${dates[index].num} ${dates[index].month}`;
+            renderTimeSlots();
+            
+            updateButton();
+            
+            if (tg?.HapticFeedback) {
+                tg.HapticFeedback.selectionChanged();
+            }
         }
-
-        // Contact functions
-        function makeCall1() { window.open('tel:+79600895173'); }
-        function makeCall2() { window.open('tel:+79172683383'); }
-        function openTelegram() { window.open('https://t.me/pelican_float'); }
-        function openMaps() { window.open('https://maps.google.com/?q=Казань,+Большая+красная+улица,+8'); }
+        
+        // Select time
+        function selectTime(time) {
+            state.selectedTime = time;
+            renderTimeSlots();
+            updateButton();
+            
+            if (tg?.HapticFeedback) {
+                tg.HapticFeedback.impactOccurred('medium');
+            }
+        }
+        
+        // Update button state
+        function updateButton() {
+            const btn = document.getElementById('mainButton');
+            
+            if (state.activeTab === 'booking') {
+                if (!state.selectedService) {
+                    btn.textContent = 'Выберите услугу';
+                    btn.disabled = true;
+                } else if (!state.selectedDate) {
+                    btn.textContent = 'Выберите дату';
+                    btn.disabled = true;
+                } else if (!state.selectedTime) {
+                    btn.textContent = 'Выберите время';
+                    btn.disabled = true;
+                } else {
+                    btn.textContent = `Записаться за ${state.selectedService.price.toLocaleString()} ₽`;
+                    btn.disabled = false;
+                }
+            } else if (state.activeTab === 'gifts') {
+                btn.textContent = 'Выбрать сертификат';
+                btn.disabled = false;
+            } else {
+                btn.textContent = 'Записаться';
+                btn.disabled = false;
+            }
+        }
+        
+        // Tab navigation
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
+                state.activeTab = tabName;
+                
+                // Update tabs
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                // Update sections
+                document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+                document.getElementById(tabName).classList.add('active');
+                
+                updateButton();
+                
+                if (tg?.HapticFeedback) {
+                    tg.HapticFeedback.selectionChanged();
+                }
+            });
+        });
+        
+        // Category pills
+        document.querySelectorAll('.category-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+                renderServices(pill.dataset.category);
+                
+                if (tg?.HapticFeedback) {
+                    tg.HapticFeedback.selectionChanged();
+                }
+            });
+        });
+        
+        // History tabs
+        document.querySelectorAll('.history-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.history-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+        
+        // Main button action
+        document.getElementById('mainButton').addEventListener('click', () => {
+            if (state.activeTab === 'booking' && state.selectedService && state.selectedDate && state.selectedTime) {
+                // Confirm booking
+                if (tg?.HapticFeedback) {
+                    tg.HapticFeedback.notificationOccurred('success');
+                }
+                
+                alert(`Запись подтверждена!\n\n${state.selectedService.name}\n${state.selectedDate.toLocaleDateString('ru-RU')} в ${state.selectedTime}\n\nСтоимость: ${state.selectedService.price.toLocaleString()} ₽`);
+            }
+        });
+        
+        // Helper functions
+        function openMap() {
+            window.open('https://maps.google.com', '_blank');
+        }
+        
+        function callPhone() {
+            window.location.href = 'tel:+79991234567';
+        }
+        
+        function openInstagram() {
+            window.open('https://instagram.com/pelican.float', '_blank');
+        }
+        
+        // Initialize
+        function init() {
+            renderServices();
+            
+            // Set user info from Telegram
+            if (tg?.initDataUnsafe?.user) {
+                const user = tg.initDataUnsafe.user;
+                document.getElementById('userName').textContent = 
+                    user.first_name + (user.last_name ? ' ' + user.last_name : '');
+            }
+        }
+        
+        init();
     </script>
 </body>
 </html>
