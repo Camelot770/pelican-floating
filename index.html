@@ -1570,8 +1570,63 @@
             display: flex;
             flex-direction: column;
             gap: 8px;
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
+        }
+        
+        .cert-category {
+            margin-bottom: 12px;
+        }
+        
+        .cert-category:last-child {
+            margin-bottom: 0;
+        }
+        
+        .cert-category-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .cert-category-header:hover {
+            color: var(--text-primary);
+        }
+        
+        .cert-category-icon {
+            font-size: 16px;
+        }
+        
+        .cert-category-count {
+            margin-left: auto;
+            font-size: 11px;
+            padding: 2px 8px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            color: var(--text-muted);
+        }
+        
+        .cert-category-arrow {
+            transition: transform 0.2s ease;
+        }
+        
+        .cert-category.collapsed .cert-category-arrow {
+            transform: rotate(-90deg);
+        }
+        
+        .cert-category.collapsed .cert-category-items {
+            display: none;
+        }
+        
+        .cert-category-items {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
         }
 
         .cert-service-item {
@@ -2966,17 +3021,59 @@
 
         function renderServiceCertificates() {
             const container = document.getElementById('certServicesList');
-            container.innerHTML = allServices.map(service => {
-                const price = service.has_variants && service.variants?.length > 0 
-                    ? service.variants[0].price 
-                    : service.price;
-                return `
-                    <div class="cert-service-item" data-service="${service.code}" data-price="${price}" data-name="${service.name}">
-                        <div class="cert-service-name">${service.name}</div>
-                        <div class="cert-service-price">${price.toLocaleString()} ₽</div>
+            
+            // Группируем услуги по категориям
+            const categories = {
+                'floating': { name: 'Флоатинг', icon: '🌊', services: [] },
+                'couples': { name: 'Для двоих', icon: '💕', services: [] },
+                'massage': { name: 'Массаж', icon: '💆', services: [] },
+                'spa': { name: 'SPA-ритуалы', icon: '🧖', services: [] }
+            };
+            
+            allServices.forEach(service => {
+                const cat = service.category || 'floating';
+                if (categories[cat]) {
+                    categories[cat].services.push(service);
+                } else {
+                    categories['floating'].services.push(service);
+                }
+            });
+            
+            // Рендерим по категориям
+            let html = '';
+            for (const [catKey, category] of Object.entries(categories)) {
+                if (category.services.length === 0) continue;
+                
+                html += `
+                    <div class="cert-category" data-category="${catKey}">
+                        <div class="cert-category-header" onclick="toggleCertCategory('${catKey}')">
+                            <span class="cert-category-icon">${category.icon}</span>
+                            <span>${category.name}</span>
+                            <span class="cert-category-count">${category.services.length}</span>
+                            <span class="cert-category-arrow">▼</span>
+                        </div>
+                        <div class="cert-category-items">
+                `;
+                
+                category.services.forEach(service => {
+                    const price = service.has_variants && service.variants?.length > 0 
+                        ? service.variants[0].price 
+                        : service.price;
+                    html += `
+                        <div class="cert-service-item" data-service="${service.code}" data-price="${price}" data-name="${service.name}">
+                            <div class="cert-service-name">${service.name}</div>
+                            <div class="cert-service-price">${price.toLocaleString()} ₽</div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
                     </div>
                 `;
-            }).join('');
+            }
+            
+            container.innerHTML = html;
 
             // Добавляем обработчики
             container.querySelectorAll('.cert-service-item').forEach(item => {
@@ -3002,6 +3099,14 @@
                     }, 100);
                 });
             });
+        }
+        
+        function toggleCertCategory(catKey) {
+            const category = document.querySelector(`.cert-category[data-category="${catKey}"]`);
+            if (category) {
+                category.classList.toggle('collapsed');
+                haptic('light');
+            }
         }
 
         function updateCertSummary() {
