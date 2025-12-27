@@ -3956,16 +3956,9 @@
         function refreshApp() {
             const btn = document.querySelector('.refresh-btn');
             btn.classList.add('spinning');
-            
-            // Перезагружаем данные
-            loadServices();
-            loadBookings();
-            
-            // Показываем уведомление
             setTimeout(() => {
-                btn.classList.remove('spinning');
-                showToast('Данные обновлены');
-            }, 800);
+                window.location.reload();
+            }, 300);
         }
 
         function makeCall1() { window.open('tel:+79600895173'); }
