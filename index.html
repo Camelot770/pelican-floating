@@ -1221,6 +1221,131 @@
             color: var(--text-secondary);
         }
 
+        /* Accordion for Info */
+        .info-accordion {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .accordion-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            padding: 14px 16px;
+            gap: 12px;
+        }
+
+        .accordion-icon {
+            font-size: 24px;
+        }
+
+        .accordion-title {
+            flex: 1;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .accordion-arrow {
+            font-size: 20px;
+            color: var(--text-secondary);
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item.open .accordion-arrow {
+            transform: rotate(90deg);
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 16px;
+        }
+
+        .accordion-item.open .accordion-content {
+            max-height: 2000px;
+            padding: 0 16px 16px 16px;
+        }
+
+        .benefit-section {
+            margin-bottom: 16px;
+        }
+
+        .benefit-section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .benefit-list {
+            margin: 0;
+            padding-left: 20px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.8;
+        }
+
+        .benefit-list li {
+            margin-bottom: 4px;
+        }
+
+        .benefit-tip {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 12px;
+        }
+
+        .session-step {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--text-primary);
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
         /* Promotions */
         .promotions-list {
             display: flex;
@@ -2135,12 +2260,117 @@
                         </div>
                     </div>
                     <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7;">
-                        Новый способ психоэмоционального и физического расслабления в капсуле сенсорной депривации Dreampod. 
-                        Оздоровительные процедуры на системе сухого флоатинга Nuvola.
+                        Флоатинг — это глубокое расслабление в специальной капсуле с солёной водой при температуре тела. 
+                        Вы буквально парите в невесомости, освобождаясь от стресса и напряжения.
                     </p>
                 </div>
 
-                <div class="section-title">Контакты</div>
+                <!-- Accordion: Польза флоатинга -->
+                <div class="info-accordion">
+                    <div class="accordion-item" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-icon">💧</div>
+                            <div class="accordion-title">Польза флоатинга</div>
+                            <span class="accordion-arrow">›</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="benefit-section">
+                                <div class="benefit-section-title">🧠 Для нервной системы:</div>
+                                <ul class="benefit-list">
+                                    <li>Глубокое расслабление и снятие стресса</li>
+                                    <li>Улучшение качества сна</li>
+                                    <li>Снижение тревожности и депрессии</li>
+                                    <li>Медитативное состояние без усилий</li>
+                                    <li>Повышение концентрации и креативности</li>
+                                </ul>
+                            </div>
+                            <div class="benefit-section">
+                                <div class="benefit-section-title">💪 Для тела:</div>
+                                <ul class="benefit-list">
+                                    <li>Снятие мышечного напряжения</li>
+                                    <li>Облегчение болей в спине и суставах</li>
+                                    <li>Ускорение восстановления после тренировок</li>
+                                    <li>Улучшение кровообращения</li>
+                                    <li>Снижение артериального давления</li>
+                                </ul>
+                            </div>
+                            <div class="benefit-section">
+                                <div class="benefit-section-title">✨ Для кожи и волос:</div>
+                                <ul class="benefit-list">
+                                    <li>Магниевая соль питает кожу</li>
+                                    <li>Улучшение состояния при экземе и псориазе</li>
+                                    <li>Укрепление волос и ногтей</li>
+                                </ul>
+                            </div>
+                            <div class="benefit-section">
+                                <div class="benefit-section-title">🎯 Кому особенно полезно:</div>
+                                <ul class="benefit-list">
+                                    <li>Людям с напряжённой работой</li>
+                                    <li>Спортсменам для восстановления</li>
+                                    <li>При хронических болях</li>
+                                    <li>Беременным (после консультации с врачом)</li>
+                                    <li>Творческим людям для вдохновения</li>
+                                </ul>
+                            </div>
+                            <div class="benefit-tip">
+                                <strong>⏱ Рекомендуемый курс:</strong> 5-10 сеансов с интервалом 3-7 дней для максимального эффекта.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion: Как проходит сеанс -->
+                    <div class="accordion-item" onclick="toggleAccordion(this)">
+                        <div class="accordion-header">
+                            <div class="accordion-icon">❓</div>
+                            <div class="accordion-title">Как проходит сеанс</div>
+                            <span class="accordion-arrow">›</span>
+                        </div>
+                        <div class="accordion-content">
+                            <div class="session-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <div class="step-title">Подготовка (5-10 мин)</div>
+                                    <div class="step-desc">Вы принимаете душ, снимаете украшения и контактные линзы. Мы выдаём беруши и вазелин для мелких ранок.</div>
+                                </div>
+                            </div>
+                            <div class="session-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <div class="step-title">Погружение</div>
+                                    <div class="step-desc">Вы заходите в капсулу с 500 кг английской соли Эпсома. Вода нагрета до 34.5°C — температуры кожи. Вы ложитесь и начинаете парить!</div>
+                                </div>
+                            </div>
+                            <div class="session-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <div class="step-title">Сеанс (60-120 мин)</div>
+                                    <div class="step-desc">Первые 10-15 минут тело привыкает к невесомости. Затем наступает глубокое расслабление. Можно закрыть капсулу или оставить приоткрытой.</div>
+                                </div>
+                            </div>
+                            <div class="session-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    <div class="step-title">Завершение</div>
+                                    <div class="step-desc">Мягкая музыка и свет сигнализируют об окончании. Вы принимаете душ и наслаждаетесь чаем в зоне отдыха.</div>
+                                </div>
+                            </div>
+                            <div class="benefit-section" style="margin-top: 16px;">
+                                <div class="benefit-section-title">💡 Советы для первого раза:</div>
+                                <ul class="benefit-list">
+                                    <li>Не брейтесь за 12 часов до сеанса</li>
+                                    <li>Не пейте кофе за 2-3 часа</li>
+                                    <li>Лёгкий перекус за час до сеанса</li>
+                                    <li>Расслабьтесь — капсула безопасна, вы контролируете процесс</li>
+                                </ul>
+                            </div>
+                            <div class="benefit-tip">
+                                <strong>🎁 Что мы предоставляем:</strong> полотенца, тапочки, беруши, средства для душа, фен, чай.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title" style="margin-top: 24px;">Контакты</div>
 
                 <div class="info-card" onclick="makeCall1()">
                     <div class="info-icon">📞</div>
@@ -2169,7 +2399,8 @@
                     <span class="info-arrow">›</span>
                 </div>
 
-                <div class="section-title" style="margin-top: 24px;">Польза флоатинга</div>
+                <!-- Быстрые карточки пользы -->
+                <div class="section-title" style="margin-top: 24px;">Польза одним взглядом</div>
 
                 <div class="benefits">
                     <div class="benefit">
@@ -3676,6 +3907,11 @@
         }
 
         // Contact functions
+        // Accordion toggle
+        function toggleAccordion(element) {
+            element.classList.toggle('open');
+        }
+
         function makeCall1() { window.open('tel:+79600895173'); }
         function makeCall2() { window.open('tel:+79172683383'); }
         function openTelegram() { window.open('https://t.me/pelican_float'); }
