@@ -1933,6 +1933,18 @@
                         <span class="summary-label">Итого</span>
                         <span class="summary-value" id="sumTotal">-</span>
                     </div>
+                    
+                    <!-- Комментарий к записи -->
+                    <div class="comment-section" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-color);">
+                        <label style="display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">
+                            💬 Комментарий к записи (необязательно)
+                        </label>
+                        <textarea 
+                            id="bookingComment" 
+                            placeholder="Например: первый раз, есть вопросы, нужна консультация..."
+                            style="width: 100%; min-height: 70px; padding: 12px; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-secondary); color: var(--text-primary); font-size: 14px; resize: none; font-family: inherit;"
+                        ></textarea>
+                    </div>
                 </div>
             </section>
 
@@ -3417,7 +3429,8 @@
                 time: selectedTime,
                 clientName: `${currentUser.firstName} ${currentUser.lastName}`.trim(),
                 clientPhone: currentUser.phone,
-                telegramUserId: currentUser.id
+                telegramUserId: currentUser.id,
+                comment: document.getElementById('bookingComment')?.value?.trim() || ''
             };
 
             // Сохраняем через API
