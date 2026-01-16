@@ -49,12 +49,12 @@
             --error: #dc2626;
             --shadow-glow: 0 0 40px rgba(30, 58, 138, 0.1);
         }
-        
+
         [data-theme="pelican"] .bg-gradient,
         body.pelican-theme .bg-gradient {
             background: linear-gradient(180deg, rgba(30, 58, 138, 0.03) 0%, transparent 50%);
         }
-        
+
         [data-theme="pelican"] .service-card,
         [data-theme="pelican"] .cert-card,
         body.pelican-theme .service-card,
@@ -63,135 +63,575 @@
             box-shadow: 0 2px 12px rgba(30,58,138,0.1);
             border: 1px solid rgba(30, 58, 138, 0.08);
         }
-        
+
         [data-theme="pelican"] .service-name,
         body.pelican-theme .service-name {
             color: #0f172a;
         }
-        
+
         [data-theme="pelican"] .service-duration,
         body.pelican-theme .service-duration {
             color: #475569;
         }
-        
+
         [data-theme="pelican"] .service-price,
         body.pelican-theme .service-price {
             color: #1d4ed8;
         }
-        
+
         [data-theme="pelican"] .card-title,
         body.pelican-theme .card-title {
             color: #0f172a;
         }
-        
+
         [data-theme="pelican"] .card-subtitle,
         body.pelican-theme .card-subtitle {
             color: #475569;
         }
-        
+
         [data-theme="pelican"] .info-card,
         body.pelican-theme .info-card {
             background: rgba(255, 255, 255, 0.95);
             border: 1px solid rgba(30, 58, 138, 0.08);
         }
-        
+
         [data-theme="pelican"] .info-title,
         body.pelican-theme .info-title {
             color: #475569;
         }
-        
+
         [data-theme="pelican"] .info-value,
         body.pelican-theme .info-value {
             color: #0f172a;
         }
-        
+
         [data-theme="pelican"] .info-subtitle,
         body.pelican-theme .info-subtitle {
             color: #0f172a;
         }
-        
+
         [data-theme="pelican"] .section-title,
         body.pelican-theme .section-title {
             color: #334155;
         }
-        
+
         [data-theme="pelican"] .category-tab,
         body.pelican-theme .category-tab {
             color: #475569;
             background: rgba(255, 255, 255, 0.8);
         }
-        
+
         [data-theme="pelican"] .category-tab.active,
         body.pelican-theme .category-tab.active {
             color: white;
             background: linear-gradient(135deg, #1e3a8a, #3b82f6);
         }
-        
+
         [data-theme="pelican"] .benefit-title,
         body.pelican-theme .benefit-title {
             color: #0f172a;
         }
-        
+
         [data-theme="pelican"] .benefit-text,
         body.pelican-theme .benefit-text {
             color: #475569;
         }
-        
+
         [data-theme="pelican"] .benefit-desc,
         body.pelican-theme .benefit-desc {
             color: #475569;
         }
-        
+
         [data-theme="pelican"] p,
         body.pelican-theme p {
             color: #334155;
         }
-        
+
         [data-theme="pelican"] .setting-title,
         body.pelican-theme .setting-title {
             color: #0f172a;
         }
-        
+
         [data-theme="pelican"] .setting-desc,
         body.pelican-theme .setting-desc {
             color: #475569;
         }
-        
+
         [data-theme="pelican"] .nav-item.active,
         body.pelican-theme .nav-item.active {
             background: linear-gradient(135deg, #1e3a8a, #3b82f6);
             color: white;
         }
-        
+
         [data-theme="pelican"] .header,
         body.pelican-theme .header {
             background: linear-gradient(135deg, rgba(30, 58, 138, 0.08), rgba(59, 130, 246, 0.05));
         }
-        
+
         [data-theme="pelican"] .nav,
         body.pelican-theme .nav {
             background: rgba(255, 255, 255, 0.98);
             border-top: 1px solid rgba(30, 58, 138, 0.1);
         }
-        
+
         [data-theme="pelican"] .bottom-btn,
         body.pelican-theme .bottom-btn {
             background: linear-gradient(135deg, #1e3a8a, #2563eb);
         }
-        
+
         [data-theme="pelican"] .modal-overlay,
         body.pelican-theme .modal-overlay {
             background: rgba(30, 58, 138, 0.3);
         }
-        
+
         [data-theme="pelican"] .modal,
         body.pelican-theme .modal {
             background: #ffffff;
             border: 1px solid rgba(30, 58, 138, 0.1);
         }
-        
+
         .pelican-preview {
             background: linear-gradient(135deg, #1e3a8a 50%, #f8f9fa 50%);
+        }
+
+        /* ============================================ */
+        /* ПОЛНЫЕ СТИЛИ ДЛЯ СВЕТЛОЙ ТЕМЫ PELICAN       */
+        /* ============================================ */
+
+        /* Слоты времени */
+        [data-theme="pelican"] .time-slot,
+        body.pelican-theme .time-slot {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.15);
+            color: #0f172a;
+            box-shadow: 0 2px 8px rgba(30, 58, 138, 0.08);
+        }
+
+        [data-theme="pelican"] .time-slot:hover:not(.disabled),
+        body.pelican-theme .time-slot:hover:not(.disabled) {
+            border-color: #1e3a8a;
+            background: rgba(30, 58, 138, 0.05);
+        }
+
+        [data-theme="pelican"] .time-slot.selected,
+        body.pelican-theme .time-slot.selected {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            border-color: transparent;
+        }
+
+        [data-theme="pelican"] .time-slot.disabled,
+        body.pelican-theme .time-slot.disabled {
+            background: rgba(100, 116, 139, 0.1);
+            color: #94a3b8;
+            opacity: 0.6;
+        }
+
+        /* Даты */
+        [data-theme="pelican"] .date-item,
+        body.pelican-theme .date-item {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.12);
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .date-item .date-day,
+        body.pelican-theme .date-item .date-day {
+            color: #64748b;
+        }
+
+        [data-theme="pelican"] .date-item .date-num,
+        body.pelican-theme .date-item .date-num {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .date-item .date-month,
+        body.pelican-theme .date-item .date-month {
+            color: #64748b;
+        }
+
+        [data-theme="pelican"] .date-item.selected,
+        body.pelican-theme .date-item.selected {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            border-color: transparent;
+        }
+
+        [data-theme="pelican"] .date-item.selected .date-day,
+        [data-theme="pelican"] .date-item.selected .date-num,
+        [data-theme="pelican"] .date-item.selected .date-month,
+        body.pelican-theme .date-item.selected .date-day,
+        body.pelican-theme .date-item.selected .date-num,
+        body.pelican-theme .date-item.selected .date-month {
+            color: white;
+        }
+
+        /* Навигация */
+        [data-theme="pelican"] .nav-item,
+        body.pelican-theme .nav-item {
+            color: #475569;
+        }
+
+        [data-theme="pelican"] .nav-label,
+        body.pelican-theme .nav-label {
+            color: #475569;
+        }
+
+        [data-theme="pelican"] .nav-item.active .nav-label,
+        body.pelican-theme .nav-item.active .nav-label {
+            color: white;
+        }
+
+        /* Хедер */
+        [data-theme="pelican"] .logo-text,
+        body.pelican-theme .logo-text {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .header-badge,
+        body.pelican-theme .header-badge {
+            color: #475569;
+            background: rgba(30, 58, 138, 0.08);
+        }
+
+        /* Карточки и контейнеры */
+        [data-theme="pelican"] .card,
+        body.pelican-theme .card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.08);
+            box-shadow: 0 2px 12px rgba(30, 58, 138, 0.06);
+        }
+
+        /* Summary блок */
+        [data-theme="pelican"] .summary,
+        body.pelican-theme .summary {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+
+        [data-theme="pelican"] .summary-label,
+        body.pelican-theme .summary-label {
+            color: #64748b;
+        }
+
+        [data-theme="pelican"] .summary-value,
+        body.pelican-theme .summary-value {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .summary-total .summary-value,
+        body.pelican-theme .summary-total .summary-value {
+            color: #1d4ed8;
+        }
+
+        /* Формы */
+        [data-theme="pelican"] .form-label,
+        body.pelican-theme .form-label {
+            color: #334155;
+        }
+
+        [data-theme="pelican"] .form-input,
+        body.pelican-theme .form-input {
+            background: #ffffff;
+            border: 1px solid rgba(30, 58, 138, 0.2);
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .form-input::placeholder,
+        body.pelican-theme .form-input::placeholder {
+            color: #94a3b8;
+        }
+
+        [data-theme="pelican"] .form-input:focus,
+        body.pelican-theme .form-input:focus {
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        [data-theme="pelican"] textarea.form-input,
+        body.pelican-theme textarea.form-input {
+            background: #ffffff;
+            color: #0f172a;
+        }
+
+        /* Профиль */
+        [data-theme="pelican"] .profile-header,
+        body.pelican-theme .profile-header {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.08), rgba(59, 130, 246, 0.05));
+        }
+
+        [data-theme="pelican"] .profile-name,
+        body.pelican-theme .profile-name {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .profile-phone,
+        body.pelican-theme .profile-phone {
+            color: #475569;
+        }
+
+        [data-theme="pelican"] .profile-stat-value,
+        body.pelican-theme .profile-stat-value {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .profile-stat-label,
+        body.pelican-theme .profile-stat-label {
+            color: #64748b;
+        }
+
+        [data-theme="pelican"] .profile-avatar,
+        body.pelican-theme .profile-avatar {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        }
+
+        /* Табы записей */
+        [data-theme="pelican"] .bookings-tab,
+        body.pelican-theme .bookings-tab {
+            color: #64748b;
+            background: transparent;
+        }
+
+        [data-theme="pelican"] .bookings-tab.active,
+        body.pelican-theme .bookings-tab.active {
+            color: #1e3a8a;
+            background: rgba(30, 58, 138, 0.08);
+        }
+
+        /* Карточки записей */
+        [data-theme="pelican"] .booking-card,
+        body.pelican-theme .booking-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+
+        [data-theme="pelican"] .booking-service,
+        body.pelican-theme .booking-service {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .booking-date,
+        [data-theme="pelican"] .booking-time,
+        body.pelican-theme .booking-date,
+        body.pelican-theme .booking-time {
+            color: #475569;
+        }
+
+        [data-theme="pelican"] .booking-price,
+        body.pelican-theme .booking-price {
+            color: #1d4ed8;
+        }
+
+        [data-theme="pelican"] .booking-status,
+        body.pelican-theme .booking-status {
+            color: #059669;
+        }
+
+        /* Сертификаты */
+        [data-theme="pelican"] .cert-name,
+        body.pelican-theme .cert-name {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .cert-desc,
+        body.pelican-theme .cert-desc {
+            color: #64748b;
+        }
+
+        [data-theme="pelican"] .cert-price,
+        body.pelican-theme .cert-price {
+            color: #1d4ed8;
+        }
+
+        [data-theme="pelican"] .cert-badge,
+        body.pelican-theme .cert-badge {
+            color: #1e3a8a;
+        }
+
+        [data-theme="pelican"] .cert-type-tab,
+        body.pelican-theme .cert-type-tab {
+            color: #64748b;
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        [data-theme="pelican"] .cert-type-tab.active,
+        body.pelican-theme .cert-type-tab.active {
+            color: white;
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+        }
+
+        /* Страница авторизации */
+        [data-theme="pelican"] .auth-screen,
+        body.pelican-theme .auth-screen {
+            background: linear-gradient(180deg, #f8f9fa 0%, #e2e8f0 100%);
+        }
+
+        [data-theme="pelican"] .auth-title,
+        body.pelican-theme .auth-title {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .auth-subtitle,
+        body.pelican-theme .auth-subtitle {
+            color: #475569;
+        }
+
+        [data-theme="pelican"] .auth-btn,
+        body.pelican-theme .auth-btn {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+        }
+
+        [data-theme="pelican"] .auth-feature-text,
+        body.pelican-theme .auth-feature-text {
+            color: #475569;
+        }
+
+        /* Пустые состояния */
+        [data-theme="pelican"] .empty-category,
+        [data-theme="pelican"] .no-bookings,
+        [data-theme="pelican"] .no-slots,
+        body.pelican-theme .empty-category,
+        body.pelican-theme .no-bookings,
+        body.pelican-theme .no-slots {
+            color: #64748b;
+        }
+
+        [data-theme="pelican"] .empty-category-text,
+        body.pelican-theme .empty-category-text {
+            color: #64748b;
+        }
+
+        /* Модальные окна */
+        [data-theme="pelican"] .modal-title,
+        body.pelican-theme .modal-title {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .modal-text,
+        body.pelican-theme .modal-text {
+            color: #475569;
+        }
+
+        [data-theme="pelican"] .modal-close,
+        body.pelican-theme .modal-close {
+            color: #64748b;
+        }
+
+        /* Кнопки отмены */
+        [data-theme="pelican"] .cancel-btn,
+        body.pelican-theme .cancel-btn {
+            color: #dc2626;
+            background: rgba(220, 38, 38, 0.08);
+        }
+
+        /* Настройки */
+        [data-theme="pelican"] .settings-section,
+        body.pelican-theme .settings-section {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.08);
+        }
+
+        [data-theme="pelican"] .setting-item,
+        body.pelican-theme .setting-item {
+            border-bottom-color: rgba(30, 58, 138, 0.08);
+        }
+
+        /* Темы в настройках */
+        [data-theme="pelican"] .theme-option,
+        body.pelican-theme .theme-option {
+            border: 2px solid rgba(30, 58, 138, 0.15);
+        }
+
+        [data-theme="pelican"] .theme-option.active,
+        body.pelican-theme .theme-option.active {
+            border-color: #1e3a8a;
+        }
+
+        [data-theme="pelican"] .theme-name,
+        body.pelican-theme .theme-name {
+            color: #0f172a;
+        }
+
+        /* Информация о студии */
+        [data-theme="pelican"] .studio-info,
+        body.pelican-theme .studio-info {
+            color: #334155;
+        }
+
+        [data-theme="pelican"] .contact-item,
+        body.pelican-theme .contact-item {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .contact-label,
+        body.pelican-theme .contact-label {
+            color: #64748b;
+        }
+
+        /* Варианты услуг */
+        [data-theme="pelican"] .variant-item,
+        body.pelican-theme .variant-item {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.12);
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .variant-item:hover,
+        body.pelican-theme .variant-item:hover {
+            border-color: #1e3a8a;
+        }
+
+        [data-theme="pelican"] .variant-item.selected,
+        body.pelican-theme .variant-item.selected {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            border-color: transparent;
+        }
+
+        [data-theme="pelican"] .variant-duration,
+        body.pelican-theme .variant-duration {
+            color: #64748b;
+        }
+
+        [data-theme="pelican"] .variant-price,
+        body.pelican-theme .variant-price {
+            color: #1d4ed8;
+        }
+
+        [data-theme="pelican"] .variant-item.selected .variant-duration,
+        [data-theme="pelican"] .variant-item.selected .variant-price,
+        body.pelican-theme .variant-item.selected .variant-duration,
+        body.pelican-theme .variant-item.selected .variant-price {
+            color: white;
+        }
+
+        /* Описание услуги */
+        [data-theme="pelican"] .service-description,
+        body.pelican-theme .service-description {
+            color: #475569;
+        }
+
+        /* Акции и новости */
+        [data-theme="pelican"] .promo-card,
+        body.pelican-theme .promo-card {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(30, 58, 138, 0.1);
+        }
+
+        [data-theme="pelican"] .promo-title,
+        body.pelican-theme .promo-title {
+            color: #0f172a;
+        }
+
+        [data-theme="pelican"] .promo-text,
+        body.pelican-theme .promo-text {
+            color: #475569;
+        }
+
+        /* Комментарий к записи */
+        [data-theme="pelican"] .comment-label,
+        body.pelican-theme .comment-label {
+            color: #334155;
         }
 
         * {
